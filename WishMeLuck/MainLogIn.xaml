@@ -1,0 +1,15 @@
+﻿<Window x:Class="WishMeLuck.MainLogIn"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WishMeLuck"
+        mc:Ignorable="d"
+        Title="MainLogIn" Height="295.937" Width="488.262">
+    <Grid>
+        <Label x:Name="UserName" Content="User's name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Lists" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="WishListOfLists" HorizontalAlignment="Left" Height="161" Margin="10,67,0,0" VerticalAlignment="Top" Width="101"/>
+
+    </Grid>
+</Window>

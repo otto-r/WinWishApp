@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WishMeLuck"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Wish - Log In" Height="130.723" Width="312.048">
     <Grid>
-        <TextBox x:Name="TextBoxUserName" HorizontalAlignment="Left" Height="23" Margin="10,11,0,0" TextWrapping="Wrap" Text="User Name" VerticalAlignment="Top" Width="120"/>
-        <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Height="23" Password="oooo" Width="120"/>
+        <TextBox x:Name="TextBoxUserName" HorizontalAlignment="Left" Height="23" Margin="10,11,0,0" TextWrapping="Wrap" Text="otto" VerticalAlignment="Top" Width="120"/>
+        <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Height="23" Password="123" Width="120"/>
 
         <Button x:Name="ButtonLogIn" Click="ButtonLogIn_Click" Content="Log In" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top" Width="53"/>
         <Button x:Name="ButtonRegister" Click="ButtonRegister_Click" Content="Register" HorizontalAlignment="Left" Margin="68,68,0,0" VerticalAlignment="Top" Width="62"/>
