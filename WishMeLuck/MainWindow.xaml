@@ -5,13 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WishMeLuck"
         mc:Ignorable="d"
-        Title="Wish - Log In" Height="130.723" Width="312.048">
+        ResizeMode="NoResize"
+        Title="Wish - Log In" Height="135" Width="155.205"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <TextBox x:Name="TextBoxUserName" HorizontalAlignment="Left" Height="23" Margin="10,11,0,0" TextWrapping="Wrap" Text="otto" VerticalAlignment="Top" Width="120"/>
         <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Height="23" Password="123" Width="120"/>
+        <PasswordBox x:Name="PasswordBoxRetype" PasswordChanged="PasswordBoxRetype_PasswordChanged" DataContextChanged="PasswordBoxRetype_DataContextChanged" Visibility="Hidden" HorizontalAlignment="Left" Margin="10,93,0,0" VerticalAlignment="Top" Width="120" Background="White"/>
+        
 
         <Button x:Name="ButtonLogIn" Click="ButtonLogIn_Click" Content="Log In" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top" Width="53"/>
-        <Button x:Name="ButtonRegister" Click="ButtonRegister_Click" Content="Register" HorizontalAlignment="Left" Margin="68,68,0,0" VerticalAlignment="Top" Width="62"/>
+        <Button x:Name="ButtonShowRegister" Click="ButtonShowRegister_Click" Content="Register" HorizontalAlignment="Left" Margin="68,68,0,0" VerticalAlignment="Top" Width="62"/>
+        <Button x:Name="ButtonRegister" Click="ButtonRegister_Click" Visibility="Hidden" Content="Register" HorizontalAlignment="Left" Margin="68,68,0,0" VerticalAlignment="Top" Width="62"/>
 
     </Grid>
 </Window>
