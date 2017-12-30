@@ -60,7 +60,7 @@
     <Compile Include="JSONObjects.cs" />
     <Compile Include="UserInputValidation.cs" />
     <Compile Include="WebRequest.cs" />
-    <Page Include="MainLogIn.xaml">
+    <Page Include="LoggedIn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -72,8 +72,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainLogIn.xaml.cs">
-      <DependentUpon>MainLogIn.xaml</DependentUpon>
+    <Compile Include="LoggedIn.xaml.cs">
+      <DependentUpon>LoggedIn.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -106,6 +106,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Misc\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

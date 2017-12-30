@@ -98,63 +98,11 @@ namespace WishMeLuck
 
         }
 
-        private void PasswordBoxRetype_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-
-        }
-
         private void PasswordBoxRetype_PasswordChanged(object sender, RoutedEventArgs e)
         {
             Dispatcher.Invoke(() =>
             {
-                if (PasswordBoxRetype.Password.Length == 1)
-                {
-                    PasswordBoxRetype.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFFFCDCD"));
-                }
-                else if (PasswordBoxRetype.Password.Length == 2)
-                {
-                    PasswordBoxRetype.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFFFD7CD"));
-                }
-                else if (PasswordBoxRetype.Password.Length == 3)
-                {
-                    PasswordBoxRetype.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFFFE1CD"));
-                }
-                else if (PasswordBoxRetype.Password.Length == 4)
-                {
-                    PasswordBoxRetype.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFFFEBCD"));
-                }
-                else if (PasswordBoxRetype.Password.Length == 5)
-                {
-                    PasswordBoxRetype.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFFFF5CD"));
-                }
-                else if (PasswordBoxRetype.Password.Length == 6)
-                {
-                    PasswordBoxRetype.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFFFFFCD"));
-                }
-                else if (PasswordBoxRetype.Password.Length == 7)
-                {
-                    PasswordBoxRetype.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFF5FFCD"));
-                }
-                else if (PasswordBoxRetype.Password.Length == 8)
-                {
-                    PasswordBoxRetype.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFEBFFCD"));
-                }
-                else if (PasswordBoxRetype.Password.Length == 9)
-                {
-                    PasswordBoxRetype.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFE1FFCD"));
-                }
-                else if (PasswordBoxRetype.Password.Length == 10)
-                {
-                    PasswordBoxRetype.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFD7FFCD"));
-                }
-                else if (PasswordBoxRetype.Password.Length > 10)
-                {
-                    PasswordBoxRetype.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFCDFFCD"));
-                }
-                else
-                {
-                    PasswordBoxRetype.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFFFFFFF"));
-                }
+                PasswordBoxRetype.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom(UserInputValidation.PasswordStrengthTest(PasswordBoxRetype.Password)));
             });
         }
     }

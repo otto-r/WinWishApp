@@ -11,7 +11,7 @@
     <Grid>
         <TextBox x:Name="TextBoxUserName" HorizontalAlignment="Left" Height="23" Margin="10,11,0,0" TextWrapping="Wrap" Text="otto" VerticalAlignment="Top" Width="120"/>
         <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Height="23" Password="123" Width="120"/>
-        <PasswordBox x:Name="PasswordBoxRetype" PasswordChanged="PasswordBoxRetype_PasswordChanged" DataContextChanged="PasswordBoxRetype_DataContextChanged" Visibility="Hidden" HorizontalAlignment="Left" Margin="10,93,0,0" VerticalAlignment="Top" Width="120" Background="White"/>
+        <PasswordBox x:Name="PasswordBoxRetype" PasswordChanged="PasswordBoxRetype_PasswordChanged" Visibility="Hidden" HorizontalAlignment="Left" Margin="10,93,0,0" VerticalAlignment="Top" Width="120" Background="White"/>
         
 
         <Button x:Name="ButtonLogIn" Click="ButtonLogIn_Click" Content="Log In" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top" Width="53"/>
