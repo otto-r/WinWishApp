@@ -27,7 +27,6 @@ namespace WishMeLuck
         public MainWindow()
         {
             InitializeComponent();
-
         }
 
         private void ButtonLogIn_Click(object sender, RoutedEventArgs e)
@@ -42,49 +41,47 @@ namespace WishMeLuck
 
         private void ButtonRegister_Click(object sender, RoutedEventArgs e)
         {
-            //Dispatcher.Invoke(() =>
-            //{
-            //    MainLogIn mainLogInWindow = new MainLogIn(logInUserObject);
-            //    mainLogInWindow.Show();
-            //    this.Close();
-            //});
+            if (UserInputValidation.ValidCharacters(TextBoxUserName.Text))
+            {
+                //Register method here
+            }
+            else
+            {
+                MessageBox.Show("No special characters allowed.\n- Allowed: A-Z, a-z and 0-9");
+            }
+        }
+
+        private void ButtonShowRegister_Click(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                PasswordBoxRetype.Margin = new Thickness(10, 68, 0, 0);
+                ButtonLogIn.Margin = new Thickness(10, 93, 0, 0);
+                ButtonRegister.Margin = new Thickness(68, 93, 0, 0);
+                ButtonShowRegister.Margin = new Thickness(68, 93, 0, 0);
+                PasswordBoxRetype.Visibility = Visibility.Visible;
+                Application.Current.MainWindow.Height = 160;
+                ButtonShowRegister.Visibility = Visibility.Hidden;
+                ButtonRegister.Visibility = Visibility.Visible;
+                PasswordBoxRetype.Focus();
+            });
         }
 
         public void HttpRequest(string userName, string password)
         {
+
             Task.Run(() =>
             {
                 ASCIIEncoding encoding = new ASCIIEncoding();
                 string postData = "un=" + userName + "&pw=" + password;
-                byte[] data = encoding.GetBytes(postData);
+                string method = "POST";
+                string phpFileName = "login.php";
 
-                WebRequest request = WebRequest.Create("http://192.168.10.191/test/webservice/login.php");
-                request.Method = "POST";
-                request.ContentType = "application/x-www-form-urlencoded";
-                request.ContentLength = data.Length;
-
-                Stream stream = request.GetRequestStream();
-                stream.Write(data, 0, data.Length);
-                stream.Close();
-
-                WebResponse response = request.GetResponse();
-                stream = response.GetResponseStream();
-
-                StreamReader sr = new StreamReader(stream);
-                string jsonStr = sr.ReadToEnd();
+                string jsonStr = WebReq.WebRq(postData, method, phpFileName);
 
                 LogIn logInUserObject = JsonConvert.DeserializeObject<LogIn>(jsonStr);
 
-                //MessageBox.Show(jsonStr);
-                //Clipboard.SetText(jsonStr);
-                //MessageBox.Show($"Success or not = {logInUserObject.success}\nMsg: {logInUserObject.msg}");
-                //Dispatcher.Invoke(() => { TextBoxUserName.Text = jsonStr; });
-
-                int testInt = logInUserObject.success;
-                sr.Close();
-                stream.Close();
-
-                if (testInt == 1)
+                if (logInUserObject.success == 1)
                 {
                     Dispatcher.Invoke(() =>
                     {
@@ -93,6 +90,19 @@ namespace WishMeLuck
                         this.Close();
                     });
                 }
+            });
+        }
+
+        public void PasswordSecurityColoring()
+        {
+
+        }
+
+        private void PasswordBoxRetype_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                PasswordBoxRetype.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom(UserInputValidation.PasswordStrengthTest(PasswordBoxRetype.Password)));
             });
         }
     }

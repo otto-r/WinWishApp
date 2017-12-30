@@ -25,29 +25,20 @@ namespace WishMeLuck
         public MainLogIn(LogIn logInUserObject)
         {
             InitializeComponent();
+            Dispatcher.Invoke(() =>
+            {
+                UserName.Content = logInUserObject.user.username;
+            });
             GetListofLists(logInUserObject.user);
         }
 
         private void GetListofLists(User user)
         {
-            ASCIIEncoding encoding = new ASCIIEncoding();
             string postData = "un=" + user.username;
-            byte[] data = encoding.GetBytes(postData);
+            string method = "POST";
+            string phpFileName = "getLists.php";
 
-            WebRequest request = WebRequest.Create("http://192.168.10.191/test/webservice/getLists.php");
-            request.Method = "POST";
-            request.ContentType = "application/x-www-form-urlencoded";
-            request.ContentLength = data.Length;
-
-            Stream stream = request.GetRequestStream();
-            stream.Write(data, 0, data.Length);
-            stream.Close();
-
-            WebResponse response = request.GetResponse();
-            stream = response.GetResponseStream();
-
-            StreamReader sr = new StreamReader(stream);
-            string jsonStr = sr.ReadToEnd();
+            string jsonStr = WebReq.WebRq(postData, method, phpFileName);
 
             ListOfLists ListOfLists = JsonConvert.DeserializeObject<ListOfLists>(jsonStr);
 
