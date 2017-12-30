@@ -58,6 +58,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="JSONObjects.cs" />
+    <Compile Include="UserInputValidation.cs" />
     <Compile Include="WebRequest.cs" />
     <Page Include="MainLogIn.xaml">
       <SubType>Designer</SubType>

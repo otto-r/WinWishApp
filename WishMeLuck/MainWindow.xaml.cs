@@ -41,7 +41,14 @@ namespace WishMeLuck
 
         private void ButtonRegister_Click(object sender, RoutedEventArgs e)
         {
-
+            if (UserInputValidation.ValidCharacters(TextBoxUserName.Text))
+            {
+                //Register method here
+            }
+            else
+            {
+                MessageBox.Show("No special characters allowed.\n- Allowed: A-Z, a-z and 0-9");
+            }
         }
 
         private void ButtonShowRegister_Click(object sender, RoutedEventArgs e)
@@ -62,6 +69,7 @@ namespace WishMeLuck
 
         public void HttpRequest(string userName, string password)
         {
+
             Task.Run(() =>
             {
                 ASCIIEncoding encoding = new ASCIIEncoding();
