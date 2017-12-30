@@ -23,6 +23,7 @@ namespace WishMeLuck
         }
         public static string PasswordStrengthTest(string password)  //Returns HEX color code
         {
+
             if (password.Length == 1)
             {
                 return ("#FFFFCDCD");
