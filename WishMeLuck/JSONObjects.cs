@@ -21,28 +21,27 @@ namespace WishMeLuck
         public string Password { get; set; }
     }
 
-    public class ListOfLists
+
+    public class ListOfWishLists
     {
         public int success { get; set; }
         public string msg { get; set; }
-        public List<string> WishLists { get; set; }
+        public List<WishList> wishLists { get; set; }
     }
 
     public class WishList
     {
-        public int Id { get; set; }
-        public string UserName { get; set; }
-        public string WishListName { get; set; }
-        public WishListItem WshListItem{ get; set; }
+        public string wishListName { get; set; }
+        public List<WishListItem> wishList { get; set; }
     }
 
     public class WishListItem
     {
-        public int Id { get; set; }
-        public string UserName { get; set; }
-        public string WishListName { get; set; }
-        public string WishItemName { get; set; }
-        public string WishItemDesc { get; set; }
-        public string WishItemAvailableAt { get; set; }
+        public string wId { get; set; }
+        public string username { get; set; }
+        public string wishListName { get; set; }
+        public string wishItemName { get; set; }
+        public object wishItemDesc { get; set; }
+        public object wishItemAvailableAt { get; set; }
     }
 }

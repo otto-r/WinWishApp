@@ -72,7 +72,6 @@ namespace WishMeLuck
 
             Task.Run(() =>
             {
-                ASCIIEncoding encoding = new ASCIIEncoding();
                 string postData = "un=" + userName + "&pw=" + password;
                 string method = "POST";
                 string phpFileName = "login.php";

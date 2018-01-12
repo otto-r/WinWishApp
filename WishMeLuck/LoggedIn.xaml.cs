@@ -22,6 +22,7 @@ namespace WishMeLuck
     /// </summary>
     public partial class MainLogIn : Window
     {
+        ListOfWishLists listOfWishLists;
         public MainLogIn(LogIn logInUserObject)
         {
             InitializeComponent();
@@ -29,10 +30,13 @@ namespace WishMeLuck
             {
                 UserName.Content = logInUserObject.user.username;
             });
-            GetListofLists(logInUserObject.user);
+            listOfWishLists = GetListofLists(logInUserObject.user);
+
+            FillListOfLists(listOfWishLists);
+            //FillWishList(listOfWishLists,"Djur");
         }
 
-        private void GetListofLists(User user)
+        private ListOfWishLists GetListofLists(User user)
         {
             string postData = "un=" + user.username;
             string method = "POST";
@@ -40,13 +44,77 @@ namespace WishMeLuck
 
             string jsonStr = WebReq.WebRq(postData, method, phpFileName);
 
-            ListOfLists ListOfLists = JsonConvert.DeserializeObject<ListOfLists>(jsonStr);
+            ListOfWishLists ListOfLists = JsonConvert.DeserializeObject<ListOfWishLists>(jsonStr);
+            return ListOfLists;
+        }
 
+        private void WishListOfLists_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string selectedWishList = WishListOfLists.SelectedItem.ToString();
+            FillWishList(listOfWishLists, selectedWishList);
+            Task.Run(() =>
+            {
+
+            });
+        }
+
+        private void FillListOfLists(ListOfWishLists ListOfLists)
+        {
             Dispatcher.Invoke(() =>
             {
-                foreach (var item in ListOfLists.WishLists)
+                WishListOfLists.Items.Clear();
+                foreach (var item in ListOfLists.wishLists)
                 {
-                    WishListOfLists.Items.Add(item);
+                    WishListOfLists.Items.Add(item.wishListName);
+                }
+            });
+        }
+
+        private void FillWishList(ListOfWishLists ListOfLists, string wishListName)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                WishListBox.Items.Clear();
+                foreach (var WishList in ListOfLists.wishLists)
+                {
+                    if (WishList.wishListName == wishListName)
+                    {
+                        foreach (var item in WishList.wishList)
+                        {
+                            WishListBox.Items.Add(item.wishItemName);
+                        }
+                    }
+                }
+            });
+        }
+
+        private void WishListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                WishListItem.SelectedIndex = -1;
+                WishListItem.Items.Clear();
+            });
+            string selectedItem = WishListBox.SelectedItem.ToString();
+            FillItemInfo(selectedItem);
+        }
+
+        private void FillItemInfo(string itemSelected)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                WishListItem.Items.Clear();
+                foreach (var wishList in listOfWishLists.wishLists)
+                {
+                    foreach (var item in wishList.wishList)
+                    {
+                        if (item.wishItemName == itemSelected)
+                        {
+                            //WishListItem.Items.Add("Description: " + item.wishItemDesc);
+                            WishListItem.Items.Add("Item id: " + item.wId);
+                            //WishListItem.Items.Add("Available at: " + item.wishItemAvailableAt);
+                        }
+                    }
                 }
             });
         }
