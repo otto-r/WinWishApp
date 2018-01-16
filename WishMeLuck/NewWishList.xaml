@@ -1,0 +1,20 @@
+﻿<Window x:Class="WishMeLuck.NewWishList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WishMeLuck"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Add New Wish List" Height="180.813" Width="351.467">
+    <Grid>
+        <Label Content="Name of Wish List" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="Name" x:Name="TextBoxWishListName" HorizontalAlignment="Left" Height="23" Margin="10,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="LabelUserInputvalidation" Content="" FontSize="10" HorizontalAlignment="Left" Margin="135,33,0,0" VerticalAlignment="Top"/>
+
+        <TextBox x:Name="TextBoxWishList2" HorizontalAlignment="Left" Height="23" Margin="10,85,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="ButtonAddNewList" Content="Add" Click="ButtonAddNewList_Click" HorizontalAlignment="Left" Margin="135,70,0,0" VerticalAlignment="Top" Width="44"/>
+        <Label x:Name="LabelUserName" HorizontalAlignment="Left" Margin="135,7,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

@@ -11,9 +11,10 @@
     <Grid>
         <Label x:Name="UserName" Content="User's name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label Content="Lists" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
-        <ListBox x:Name="WishListOfLists" SelectionChanged="WishListOfLists_SelectionChanged" HorizontalAlignment="Left" Height="161" Margin="10,67,0,0" VerticalAlignment="Top" Width="101"/>
+        <ListBox x:Name="WishListOfLists" SelectionChanged="WishListOfLists_SelectionChanged" HorizontalAlignment="Left" Height="137" Margin="10,67,0,0" VerticalAlignment="Top" Width="101"/>
         <ListBox x:Name="WishListBox" SelectionChanged="WishListBox_SelectionChanged" HorizontalAlignment="Left" Height="182" Margin="116,46,0,0" VerticalAlignment="Top" Width="138"/>
         <ListBox x:Name="WishListItem" HorizontalAlignment="Left" Height="182" Margin="259,46,0,0" VerticalAlignment="Top" Width="121"/>
+        <Button x:Name="ButtonAddNewWishList" Content="New Wish List" Click="ButtonAddNewWishList_Click" HorizontalAlignment="Left" Margin="10,209,0,0" VerticalAlignment="Top" Width="101"/>
 
     </Grid>
 </Window>
