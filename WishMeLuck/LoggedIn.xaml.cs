@@ -44,7 +44,7 @@ namespace WishMeLuck
             {
                 Dispatcher.Invoke(() =>
                 {
-                    LabelErrorMessage.Content = "ERROR: No lists fetched";
+                    LabelErrorMessage.Content = "ERROR: No lists returned";
                 });
             }
         }
@@ -172,7 +172,7 @@ namespace WishMeLuck
             {
                 Dispatcher.Invoke(() =>
                 {
-                    LabelErrorMessage.Content = "ERROR: No lists fetched";
+                    LabelErrorMessage.Content = "ERROR: No lists returned";
                 });
             }
         }
