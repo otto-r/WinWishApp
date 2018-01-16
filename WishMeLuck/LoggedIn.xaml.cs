@@ -54,8 +54,15 @@ namespace WishMeLuck
 
         private void WishListOfLists_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string selectedWishList = WishListOfLists.SelectedItem.ToString();
-            FillWishList(listOfWishLists, selectedWishList);
+            if (WishListOfLists.SelectedIndex == -1)
+            {
+                return;
+            }
+            else
+            {
+                string selectedWishList = WishListOfLists.SelectedItem.ToString();
+                FillWishList(listOfWishLists, selectedWishList);
+            }
             Task.Run(() =>
             {
 
@@ -66,6 +73,7 @@ namespace WishMeLuck
         {
             Dispatcher.Invoke(() =>
             {
+                //WishListOfLists.SelectedItem = -1;
                 WishListOfLists.Items.Clear();
                 foreach (var item in ListOfLists.wishLists)
                 {
@@ -94,20 +102,19 @@ namespace WishMeLuck
 
         private void WishListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
             Dispatcher.Invoke(() =>
             {
-                WishListItem.SelectedIndex = -1;
                 WishListItem.Items.Clear();
             });
-            try
+            if (WishListBox.SelectedIndex == -1)
+            {
+                return;
+            }
+            else
             {
                 string selectedItem = WishListBox.SelectedItem.ToString();
                 FillItemInfo(selectedItem);
-
-            }
-            catch (Exception)
-            {
-
             }
         }
 
@@ -135,6 +142,11 @@ namespace WishMeLuck
         {
             NewWishList newWishList = new NewWishList(LogInObj, listOfWishLists);
             newWishList.Show();
+        }
+
+        private void ButtonUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            FillListOfLists(GetListofLists(LogInObj.user));
         }
     }
 }

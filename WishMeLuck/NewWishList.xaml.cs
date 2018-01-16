@@ -36,11 +36,12 @@ namespace WishMeLuck
 
         private void ButtonAddNewList_Click(object sender, RoutedEventArgs e)
         {
-            if (UserInputValidation.ValidCharacters(TextBoxWishListName.Text) && !SeeIfWishListNameExists())
+            string userWishListNameInput = TextBoxWishListName.Text.Trim();
+            if (UserInputValidation.ValidCharacters(userWishListNameInput) && !SeeIfWishListNameExists())
             {
                 Task.Run(() =>
                 {
-                    //WebReq.WebRq("un=" + logInObjectUsable.user.username, "POST", "NewWishList.php");
+                    WebReq.WebRq("un=" + logInObjectUsable.user.username + "&wln="+ userWishListNameInput, "POST", "addWishList.php");
                     Dispatcher.Invoke(() =>
                     {
                         LabelUserInputvalidation.Foreground = Brushes.LightGreen;
@@ -54,7 +55,7 @@ namespace WishMeLuck
                 Dispatcher.Invoke(() =>
                 {
                     LabelUserInputvalidation.Foreground = Brushes.LightPink;
-                    LabelUserInputvalidation.Content = $"A list by the name {TextBoxWishListName.Text} already exists";
+                    LabelUserInputvalidation.Content = $"A list by the name {userWishListNameInput} already exists";
                 });
             }
             else
@@ -69,14 +70,21 @@ namespace WishMeLuck
 
         private bool SeeIfWishListNameExists()
         {
+            string userWishListNameInput = TextBoxWishListName.Text.Trim();
+
             foreach (var item in listOfWishListsObjectUsable.wishLists)
             {
-                if (TextBoxWishListName.Text.ToLower() == item.wishListName.ToLower())
+                if (userWishListNameInput.ToLower() == item.wishListName.ToLower())
                 {
                     return true;
                 }
             }
             return false;
+        }
+
+        private bool CheckServerForDuplicateName()
+        {
+
         }
     }
 }
