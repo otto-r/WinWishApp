@@ -22,9 +22,12 @@ namespace WishMeLuck
     /// </summary>
     public partial class MainLogIn : Window
     {
+        LogIn LogInObj;
+
         ListOfWishLists listOfWishLists;
         public MainLogIn(LogIn logInUserObject)
         {
+            LogInObj = logInUserObject;
             InitializeComponent();
             Dispatcher.Invoke(() =>
             {
@@ -45,6 +48,7 @@ namespace WishMeLuck
             string jsonStr = WebReq.WebRq(postData, method, phpFileName);
 
             ListOfWishLists ListOfLists = JsonConvert.DeserializeObject<ListOfWishLists>(jsonStr);
+
             return ListOfLists;
         }
 
@@ -95,8 +99,16 @@ namespace WishMeLuck
                 WishListItem.SelectedIndex = -1;
                 WishListItem.Items.Clear();
             });
-            string selectedItem = WishListBox.SelectedItem.ToString();
-            FillItemInfo(selectedItem);
+            try
+            {
+                string selectedItem = WishListBox.SelectedItem.ToString();
+                FillItemInfo(selectedItem);
+
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
         private void FillItemInfo(string itemSelected)
@@ -110,13 +122,19 @@ namespace WishMeLuck
                     {
                         if (item.wishItemName == itemSelected)
                         {
-                            //WishListItem.Items.Add("Description: " + item.wishItemDesc);
+                            WishListItem.Items.Add("Description: " + item.wishItemDesc);
                             WishListItem.Items.Add("Item id: " + item.wId);
-                            //WishListItem.Items.Add("Available at: " + item.wishItemAvailableAt);
+                            WishListItem.Items.Add("Available at: " + item.wishItemAvailableAt);
                         }
                     }
                 }
             });
+        }
+
+        private void ButtonAddNewWishList_Click(object sender, RoutedEventArgs e)
+        {
+            NewWishList newWishList = new NewWishList(LogInObj, listOfWishLists);
+            newWishList.Show();
         }
     }
 }
