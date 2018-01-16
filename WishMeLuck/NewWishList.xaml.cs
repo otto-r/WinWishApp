@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,13 +42,32 @@ namespace WishMeLuck
             {
                 Task.Run(() =>
                 {
-                    WebReq.WebRq("un=" + logInObjectUsable.user.username + "&wln="+ userWishListNameInput, "POST", "addWishList.php");
-                    Dispatcher.Invoke(() =>
+                    string postData = "xdun=" + logInObjectUsable.user.username + "&wln=" + userWishListNameInput;
+                    string method = "POST";
+                    string phpFileName = "addWishList.php";
+
+                    string jsonStr = WebReq.WebRq(postData, method, phpFileName);
+
+                    var addNewWishListObj = JsonConvert.DeserializeObject<AddNewWishList>(jsonStr);
+
+                    if (addNewWishListObj.success == 1)
                     {
-                        LabelUserInputvalidation.Foreground = Brushes.LightGreen;
-                        LabelUserInputvalidation.Content = "Successful";
-                        this.Close();
-                    });
+                        Dispatcher.Invoke(() =>
+                        {
+                            LabelUserInputvalidation.Foreground = Brushes.LightGreen;
+                            LabelUserInputvalidation.Content = "Successful";
+
+                            this.Close();
+                        });
+                    }
+                    else
+                    {
+                        Dispatcher.Invoke(() =>
+                        {
+                            LabelUserInputvalidation.Foreground = Brushes.LightPink;
+                            LabelUserInputvalidation.Content = $"Error: {addNewWishListObj.msg}";
+                        });
+                    }
                 });
             }
             else if (SeeIfWishListNameExists())
@@ -84,7 +104,7 @@ namespace WishMeLuck
 
         private bool CheckServerForDuplicateName()
         {
-
+            return false;
         }
     }
 }

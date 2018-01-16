@@ -32,11 +32,21 @@ namespace WishMeLuck
             Dispatcher.Invoke(() =>
             {
                 UserName.Content = logInUserObject.user.username;
+
             });
             listOfWishLists = GetListofLists(logInUserObject.user);
 
-            FillListOfLists(listOfWishLists);
-            //FillWishList(listOfWishLists,"Djur");
+            if (listOfWishLists != null)
+            {
+                FillListOfLists(listOfWishLists);
+            }
+            else
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    LabelErrorMessage.Content = "ERROR: No lists fetched";
+                });
+            }
         }
 
         private ListOfWishLists GetListofLists(User user)
@@ -46,6 +56,11 @@ namespace WishMeLuck
             string phpFileName = "getLists.php";
 
             string jsonStr = WebReq.WebRq(postData, method, phpFileName);
+
+            Dispatcher.Invoke(() =>
+            {
+                WishListBox.Items.Add(jsonStr);
+            });
 
             ListOfWishLists ListOfLists = JsonConvert.DeserializeObject<ListOfWishLists>(jsonStr);
 
@@ -146,7 +161,20 @@ namespace WishMeLuck
 
         private void ButtonUpdate_Click(object sender, RoutedEventArgs e)
         {
-            FillListOfLists(GetListofLists(LogInObj.user));
+            listOfWishLists = GetListofLists(LogInObj.user);
+
+            //FillListOfLists(GetListofLists(LogInObj.user));
+            if (listOfWishLists != null)
+            {
+                FillListOfLists(listOfWishLists);
+            }
+            else
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    LabelErrorMessage.Content = "ERROR: No lists fetched";
+                });
+            }
         }
     }
 }
