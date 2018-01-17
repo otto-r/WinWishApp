@@ -19,7 +19,10 @@ namespace WishMeLuck
     /// </summary>
     public partial class NewItem : Window
     {
-        public NewItem()
+        LogIn logInObjectUsable;
+        ListOfWishLists listOfWishListsObjectUsable;
+
+        public NewItem(LogIn logInUserObject, ListOfWishLists listOfWishListsObject)
         {
             InitializeComponent();
         }

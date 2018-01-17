@@ -42,7 +42,7 @@ namespace WishMeLuck
             {
                 Task.Run(() =>
                 {
-                    string postData = "xdun=" + logInObjectUsable.user.username + "&wln=" + userWishListNameInput;
+                    string postData = "un=" + logInObjectUsable.user.username + "&wln=" + userWishListNameInput;
                     string method = "POST";
                     string phpFileName = "addWishList.php";
 
