@@ -181,5 +181,22 @@ namespace WishMeLuck
             NewItem newItem = new NewItem(LogInObj, listOfWishLists, selectedWishListString);
             newItem.Show();
         }
+
+        private void ButtonDeleteItem_Click(object sender, RoutedEventArgs e)
+        {
+            string selectedItem = WishListBox.SelectedItem.ToString();
+
+            foreach (var wishList in listOfWishLists.wishLists)
+            {
+                foreach (var wishItem in wishList.wishList)
+                {
+                    if (wishItem.wishItemName == selectedItem)
+                    {
+                        DeletePrompt delete = new DeletePrompt(LogInObj, wishItem);
+                        delete.Show();
+                    }
+                }
+            }
+        }
     }
 }

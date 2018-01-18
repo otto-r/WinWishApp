@@ -60,4 +60,12 @@ namespace WishMeLuck
         public string msg { get; set; }
     }
 
+    public class DeleteItemObj
+    {
+        public bool error { get; set; }
+        public int success { get; set; }
+        public string msg { get; set; }
+    }
+
+
 }

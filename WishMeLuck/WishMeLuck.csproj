@@ -57,6 +57,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DeletePrompt.xaml.cs">
+      <DependentUpon>DeletePrompt.xaml</DependentUpon>
+    </Compile>
     <Compile Include="JSONObjects.cs" />
     <Compile Include="NewItem.xaml.cs">
       <DependentUpon>NewItem.xaml</DependentUpon>
@@ -66,6 +69,10 @@
     </Compile>
     <Compile Include="UserInputValidation.cs" />
     <Compile Include="WebRequest.cs" />
+    <Page Include="DeletePrompt.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LoggedIn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

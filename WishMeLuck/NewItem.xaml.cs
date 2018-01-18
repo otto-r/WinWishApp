@@ -58,7 +58,7 @@ namespace WishMeLuck
             string wishDescription = TextBoxItemDescription.Text;
             string wishAvailableAt = TextBoxItemAvailableAt.Text;
 
-            if (UserInputValidation.ValidCharacters(wishName))
+            if (UserInputValidation.ValidCharacters(wishName, true))
             {
                 Task.Run(() =>
                 {
