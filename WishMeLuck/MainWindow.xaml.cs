@@ -41,7 +41,7 @@ namespace WishMeLuck
 
         private void ButtonRegister_Click(object sender, RoutedEventArgs e)
         {
-            if (UserInputValidation.ValidCharacters(TextBoxUserName.Text))
+            if (UserInputValidation.ValidCharacters(TextBoxUserName.Text, false))
             {
                 //Register method here
             }

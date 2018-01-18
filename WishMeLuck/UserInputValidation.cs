@@ -9,9 +9,19 @@ namespace WishMeLuck
 {
     public class UserInputValidation
     {
-        public static bool ValidCharacters(string userInput)
+        public static bool ValidCharacters(string userInput, bool allowSpace)
         {
-            Match matchInput = Regex.Match(userInput, @"^[a-zA-ZåäöÅÄÖ0-9]*$");
+            Match matchInput;
+            if (allowSpace)
+            {
+                matchInput = Regex.Match(userInput, @"^[a-zA-ZåäöÅÄÖ0-9 ]*$");
+            }
+            else
+            {
+                matchInput = Regex.Match(userInput, @"^[a-zA-ZåäöÅÄÖ0-9]*$");
+            }
+
+
             if (matchInput.Success && !string.IsNullOrWhiteSpace(userInput))
             {
                 return true;

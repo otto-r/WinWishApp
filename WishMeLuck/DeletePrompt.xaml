@@ -1,0 +1,17 @@
+﻿<Window x:Class="WishMeLuck.DeletePrompt"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WishMeLuck"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="DeletePrompt" Height="104.289" Width="327.765">
+    <Grid>
+        <Label x:Name="LabelAreYouSure" Content="Are you sure you want to delete XXX?" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="ButtonYes" Click="ButtonYes_Click" Content="Yes" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="ButtonNo" Click="ButtonNo_Click" Content="No" HorizontalAlignment="Left" Margin="90,41,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label x:Name="LabelUserInteractionFeedback" Content="" HorizontalAlignment="Left" Margin="170,36,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

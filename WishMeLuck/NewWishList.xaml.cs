@@ -38,17 +38,17 @@ namespace WishMeLuck
         private void ButtonAddNewList_Click(object sender, RoutedEventArgs e)
         {
             string userWishListNameInput = TextBoxWishListName.Text.Trim();
-            if (UserInputValidation.ValidCharacters(userWishListNameInput) && !SeeIfWishListNameExists())
+            if (UserInputValidation.ValidCharacters(userWishListNameInput, true) && !SeeIfWishListNameExists())
             {
                 Task.Run(() =>
                 {
-                    string postData = "xdun=" + logInObjectUsable.user.username + "&wln=" + userWishListNameInput;
+                    string postData = "un=" + logInObjectUsable.user.username + "&wln=" + userWishListNameInput;
                     string method = "POST";
                     string phpFileName = "addWishList.php";
 
                     string jsonStr = WebReq.WebRq(postData, method, phpFileName);
 
-                    var addNewWishListObj = JsonConvert.DeserializeObject<AddNewWishList>(jsonStr);
+                    var addNewWishListObj = JsonConvert.DeserializeObject<AddNewWishListObj>(jsonStr);
 
                     if (addNewWishListObj.success == 1)
                     {
@@ -99,11 +99,6 @@ namespace WishMeLuck
                     return true;
                 }
             }
-            return false;
-        }
-
-        private bool CheckServerForDuplicateName()
-        {
             return false;
         }
     }

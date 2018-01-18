@@ -57,11 +57,6 @@ namespace WishMeLuck
 
             string jsonStr = WebReq.WebRq(postData, method, phpFileName);
 
-            Dispatcher.Invoke(() =>
-            {
-                WishListBox.Items.Add(jsonStr);
-            });
-
             ListOfWishLists ListOfLists = JsonConvert.DeserializeObject<ListOfWishLists>(jsonStr);
 
             return ListOfLists;
@@ -144,9 +139,9 @@ namespace WishMeLuck
                     {
                         if (item.wishItemName == itemSelected)
                         {
-                            WishListItem.Items.Add("Description: " + item.wishItemDesc);
-                            WishListItem.Items.Add("Item id: " + item.wId);
-                            WishListItem.Items.Add("Available at: " + item.wishItemAvailableAt);
+                            WishListItem.Items.Add(item.wishItemDesc);
+                            WishListItem.Items.Add(item.wId);
+                            WishListItem.Items.Add(item.wishItemAvailableAt);
                         }
                     }
                 }
@@ -163,7 +158,6 @@ namespace WishMeLuck
         {
             listOfWishLists = GetListofLists(LogInObj.user);
 
-            //FillListOfLists(GetListofLists(LogInObj.user));
             if (listOfWishLists != null)
             {
                 FillListOfLists(listOfWishLists);
@@ -174,6 +168,34 @@ namespace WishMeLuck
                 {
                     LabelErrorMessage.Content = "ERROR: No lists returned";
                 });
+            }
+        }
+
+        private void ButtonAddNewItem_Click(object sender, RoutedEventArgs e)
+        {
+            string selectedWishListString = "";
+            if (WishListOfLists.SelectedIndex != -1)
+            {
+                selectedWishListString = WishListOfLists.SelectedItem.ToString();
+            }
+            NewItem newItem = new NewItem(LogInObj, listOfWishLists, selectedWishListString);
+            newItem.Show();
+        }
+
+        private void ButtonDeleteItem_Click(object sender, RoutedEventArgs e)
+        {
+            string selectedItem = WishListBox.SelectedItem.ToString();
+
+            foreach (var wishList in listOfWishLists.wishLists)
+            {
+                foreach (var wishItem in wishList.wishList)
+                {
+                    if (wishItem.wishItemName == selectedItem)
+                    {
+                        DeletePrompt delete = new DeletePrompt(LogInObj, wishItem);
+                        delete.Show();
+                    }
+                }
             }
         }
     }
