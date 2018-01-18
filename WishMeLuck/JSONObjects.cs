@@ -45,10 +45,19 @@ namespace WishMeLuck
         public object wishItemAvailableAt { get; set; }
     }
 
-    public class AddNewWishList
+    public class AddNewWishListObj
     {
         public bool error { get; set; }
         public int success { get; set; }
         public string msg { get; set; }
     }
+
+
+    public class AddNewWishObj
+    {
+        public bool error { get; set; }
+        public int success { get; set; }
+        public string msg { get; set; }
+    }
+
 }

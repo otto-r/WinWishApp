@@ -139,9 +139,9 @@ namespace WishMeLuck
                     {
                         if (item.wishItemName == itemSelected)
                         {
-                            WishListItem.Items.Add("Description: " + item.wishItemDesc);
-                            WishListItem.Items.Add("Item id: " + item.wId);
-                            WishListItem.Items.Add("Available at: " + item.wishItemAvailableAt);
+                            WishListItem.Items.Add(item.wishItemDesc);
+                            WishListItem.Items.Add(item.wId);
+                            WishListItem.Items.Add(item.wishItemAvailableAt);
                         }
                     }
                 }
@@ -158,7 +158,6 @@ namespace WishMeLuck
         {
             listOfWishLists = GetListofLists(LogInObj.user);
 
-            //FillListOfLists(GetListofLists(LogInObj.user));
             if (listOfWishLists != null)
             {
                 FillListOfLists(listOfWishLists);

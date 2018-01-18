@@ -48,7 +48,7 @@ namespace WishMeLuck
 
                     string jsonStr = WebReq.WebRq(postData, method, phpFileName);
 
-                    var addNewWishListObj = JsonConvert.DeserializeObject<AddNewWishList>(jsonStr);
+                    var addNewWishListObj = JsonConvert.DeserializeObject<AddNewWishListObj>(jsonStr);
 
                     if (addNewWishListObj.success == 1)
                     {
