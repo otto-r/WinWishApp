@@ -57,11 +57,6 @@ namespace WishMeLuck
 
             string jsonStr = WebReq.WebRq(postData, method, phpFileName);
 
-            Dispatcher.Invoke(() =>
-            {
-                WishListBox.Items.Add(jsonStr);
-            });
-
             ListOfWishLists ListOfLists = JsonConvert.DeserializeObject<ListOfWishLists>(jsonStr);
 
             return ListOfLists;
@@ -175,6 +170,17 @@ namespace WishMeLuck
                     LabelErrorMessage.Content = "ERROR: No lists returned";
                 });
             }
+        }
+
+        private void ButtonAddNewItem_Click(object sender, RoutedEventArgs e)
+        {
+            string selectedWishListString = "";
+            if (WishListOfLists.SelectedIndex != -1)
+            {
+                selectedWishListString = WishListOfLists.SelectedItem.ToString();
+            }
+            NewItem newItem = new NewItem(LogInObj, listOfWishLists, selectedWishListString);
+            newItem.Show();
         }
     }
 }

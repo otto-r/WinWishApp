@@ -6,15 +6,13 @@
         xmlns:local="clr-namespace:WishMeLuck"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Add New Wish List" Height="180.813" Width="351.467">
+        Title="Add New Wish List" Height="123.437" Width="314.708">
     <Grid>
         <Label Content="Name of Wish List" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <TextBox Text="Name" x:Name="TextBoxWishListName" HorizontalAlignment="Left" Height="23" Margin="10,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="LabelUserInputvalidation" Content="" FontSize="10" HorizontalAlignment="Left" Margin="135,33,0,0" VerticalAlignment="Top"/>
-
-        <TextBox x:Name="TextBoxWishList2" HorizontalAlignment="Left" Height="23" Margin="10,85,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="ButtonAddNewList" Content="Add" Click="ButtonAddNewList_Click" HorizontalAlignment="Left" Margin="135,70,0,0" VerticalAlignment="Top" Width="44"/>
-        <Label x:Name="LabelUserName" HorizontalAlignment="Left" Margin="135,7,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="Name" x:Name="TextBoxWishListName" HorizontalAlignment="Left" Height="23" Margin="10,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="LabelUserInputvalidation" Content="" FontSize="10" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="ButtonAddNewList" Content="Add" Click="ButtonAddNewList_Click" HorizontalAlignment="Left" Margin="135,41,0,0" VerticalAlignment="Top" Width="44" Height="23"/>
+        <Label x:Name="LabelUserName" HorizontalAlignment="Left" Margin="121,18,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

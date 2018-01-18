@@ -101,10 +101,5 @@ namespace WishMeLuck
             }
             return false;
         }
-
-        private bool CheckServerForDuplicateName()
-        {
-            return false;
-        }
     }
 }
