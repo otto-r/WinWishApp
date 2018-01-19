@@ -67,6 +67,7 @@
     <Compile Include="NewWishList.xaml.cs">
       <DependentUpon>NewWishList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Register.cs" />
     <Compile Include="UserInputValidation.cs" />
     <Compile Include="WebRequest.cs" />
     <Page Include="DeletePrompt.xaml">

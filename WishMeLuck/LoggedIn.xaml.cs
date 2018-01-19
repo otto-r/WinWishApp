@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,8 +24,9 @@ namespace WishMeLuck
     public partial class MainLogIn : Window
     {
         LogIn LogInObj;
-
         ListOfWishLists listOfWishLists;
+        string selectedItemAvailableAt;
+
         public MainLogIn(LogIn logInUserObject)
         {
             LogInObj = logInUserObject;
@@ -112,10 +114,10 @@ namespace WishMeLuck
 
         private void WishListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
             Dispatcher.Invoke(() =>
             {
-                WishListItem.Items.Clear();
+                ButtonAvailableAt.Visibility = Visibility.Visible;
+                //WishListItem.Items.Clear();
             });
             if (WishListBox.SelectedIndex == -1)
             {
@@ -132,16 +134,29 @@ namespace WishMeLuck
         {
             Dispatcher.Invoke(() =>
             {
-                WishListItem.Items.Clear();
+                //WishListItem.Items.Clear();
                 foreach (var wishList in listOfWishLists.wishLists)
                 {
                     foreach (var item in wishList.wishList)
                     {
                         if (item.wishItemName == itemSelected)
                         {
-                            WishListItem.Items.Add(item.wishItemDesc);
-                            WishListItem.Items.Add(item.wId);
-                            WishListItem.Items.Add(item.wishItemAvailableAt);
+                            selectedItemAvailableAt = item.wishItemAvailableAt;
+                            //Check if URL if yes enable button
+                            Match matchInput = Regex.Match(item.wishItemAvailableAt, @"((www\.|(http|https|ftp|news|file)+\:\/\/)[&#95;.a-z0-9-]+\.[a-z0-9\/&#95;:@=.+?,##%&~-]*[^.|\'|\# |!|\(|?|,| |>|<|;|\)])");
+                            if (matchInput.Success)
+                            {
+                                ButtonAvailableAt.IsEnabled = true;
+                            }
+                            else
+                            {
+                                ButtonAvailableAt.IsEnabled = false;
+                            }
+
+
+                            LabelItemName.Content = item.wishItemName;
+                            LabelItemDescrition.Text = item.wishItemDesc.ToString();
+                            ButtonAvailableAt.Content = item.wishItemAvailableAt;
                         }
                     }
                 }
@@ -197,6 +212,11 @@ namespace WishMeLuck
                     }
                 }
             }
+        }
+
+        private void ButtonAvailableAt_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(selectedItemAvailableAt);
         }
     }
 }

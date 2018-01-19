@@ -11,12 +11,19 @@
     <Grid>
         <TextBox x:Name="TextBoxUserName" HorizontalAlignment="Left" Height="23" Margin="10,11,0,0" TextWrapping="Wrap" Text="otto" VerticalAlignment="Top" Width="120"/>
         <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Height="23" Password="123" Width="120"/>
-        <PasswordBox x:Name="PasswordBoxRetype" PasswordChanged="PasswordBoxRetype_PasswordChanged" Visibility="Hidden" HorizontalAlignment="Left" Margin="10,93,0,0" VerticalAlignment="Top" Width="120" Background="White"/>
-        
+        <PasswordBox x:Name="PasswordBoxRetype" PasswordChanged="PasswordBoxRetype_PasswordChanged" Visibility="Visible" Height="23" HorizontalAlignment="Left" Margin="10,204,0,0" VerticalAlignment="Top" Width="120" Background="White"/>
+
 
         <Button x:Name="ButtonLogIn" Click="ButtonLogIn_Click" Content="Log In" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top" Width="53"/>
         <Button x:Name="ButtonShowRegister" Click="ButtonShowRegister_Click" Content="Register" HorizontalAlignment="Left" Margin="68,68,0,0" VerticalAlignment="Top" Width="62"/>
         <Button x:Name="ButtonRegister" Click="ButtonRegister_Click" Visibility="Hidden" Content="Register" HorizontalAlignment="Left" Margin="68,68,0,0" VerticalAlignment="Top" Width="62"/>
+
+        <TextBox x:Name="TextBoxEmail" HorizontalAlignment="Left" Height="23" Margin="10,120,0,0" TextWrapping="Wrap" Text="E-mail" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TextBoxEmailRetype" HorizontalAlignment="Left" Height="23" Margin="10,148,0,0" TextWrapping="Wrap" Text="Re-type E-mail" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="LabelPassword" Content="Password" HorizontalAlignment="Left" Margin="10,176,0,0" VerticalAlignment="Top" Height="23" Width="120"/>
+        <Label x:Name="LabelEmail" Visibility="Hidden" Content="E-mail" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top" Height="23" Width="120"/>
+
+
 
     </Grid>
 </Window>

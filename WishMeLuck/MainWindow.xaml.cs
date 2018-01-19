@@ -24,6 +24,10 @@ namespace WishMeLuck
     /// </summary>
     public partial class MainWindow : Window
     {
+        string userName;
+        string password;
+        string eMail;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -31,8 +35,6 @@ namespace WishMeLuck
 
         private void ButtonLogIn_Click(object sender, RoutedEventArgs e)
         {
-            string userName;
-            string password;
 
             userName = TextBoxUserName.Text;
             password = PasswordBox.Password;
@@ -41,9 +43,13 @@ namespace WishMeLuck
 
         private void ButtonRegister_Click(object sender, RoutedEventArgs e)
         {
+            userName = TextBoxUserName.Text;
+            password = PasswordBox.Password;
+            //eMail = 
+
             if (UserInputValidation.ValidCharacters(TextBoxUserName.Text, false))
             {
-                //Register method here
+
             }
             else
             {
@@ -55,12 +61,20 @@ namespace WishMeLuck
         {
             Dispatcher.Invoke(() =>
             {
-                PasswordBoxRetype.Margin = new Thickness(10, 68, 0, 0);
-                ButtonLogIn.Margin = new Thickness(10, 93, 0, 0);
-                ButtonRegister.Margin = new Thickness(68, 93, 0, 0);
-                ButtonShowRegister.Margin = new Thickness(68, 93, 0, 0);
+                PasswordBox.Margin = new Thickness(10, 148, 0, 0);
+                ButtonLogIn.Margin = new Thickness(10, 204, 0, 0);
+                ButtonRegister.Margin = new Thickness(68, 204, 0, 0);
+                LabelEmail.Margin = new Thickness(10, 40, 0, 0);
+                TextBoxEmail.Margin = new Thickness(10, 68, 0, 0);
+                TextBoxEmailRetype.Margin = new Thickness(10, 92, 0, 0);
+                LabelPassword.Margin = new Thickness(10, 120, 0, 0);
+                PasswordBoxRetype.Margin = new Thickness(10, 176, 0, 0);
+                
+                
+                Application.Current.MainWindow.Height = 275;
+
+                LabelEmail.Visibility = Visibility.Visible;
                 PasswordBoxRetype.Visibility = Visibility.Visible;
-                Application.Current.MainWindow.Height = 160;
                 ButtonShowRegister.Visibility = Visibility.Hidden;
                 ButtonRegister.Visibility = Visibility.Visible;
                 PasswordBoxRetype.Focus();

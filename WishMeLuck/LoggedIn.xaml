@@ -13,12 +13,17 @@
         <Label Content="Lists" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
         <ListBox x:Name="WishListOfLists" SelectionChanged="WishListOfLists_SelectionChanged" HorizontalAlignment="Left" Height="137" Margin="10,67,0,0" VerticalAlignment="Top" Width="101"/>
         <ListBox x:Name="WishListBox" SelectionChanged="WishListBox_SelectionChanged" HorizontalAlignment="Left" Height="137" Margin="116,67,0,0" VerticalAlignment="Top" Width="138"/>
-        <ListBox x:Name="WishListItem" HorizontalAlignment="Left" Height="161" Margin="259,67,0,0" VerticalAlignment="Top" Width="121" />
         <Button x:Name="ButtonAddNewWishList" Content="New Wish List" Click="ButtonAddNewWishList_Click" HorizontalAlignment="Left" Margin="10,209,0,0" VerticalAlignment="Top" Width="101"/>
         <Button x:Name="ButtonUpdate" Click="ButtonUpdate_Click" Content="Update" HorizontalAlignment="Left" Margin="397,10,0,0" VerticalAlignment="Top" Width="75"/>
         <Label x:Name="LabelErrorMessage" Content="" HorizontalAlignment="Left" Margin="231,24,0,0" VerticalAlignment="Top"/>
         <Button x:Name="ButtonAddNewItem" Click="ButtonAddNewItem_Click" Content="Add Item" HorizontalAlignment="Left" Margin="116,209,0,0" VerticalAlignment="Top" Width="66"/>
         <Button x:Name="ButtonDeleteItem" Click="ButtonDeleteItem_Click" Content="Delete Item" HorizontalAlignment="Left" Margin="188,209,0,0" VerticalAlignment="Top" Width="66"/>
+
+        <!--item View-->
+        <Label x:Name="LabelItemName" FontSize="14" Content="" HorizontalAlignment="Left" Margin="259,67,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="LabelItemDescrition" IsReadOnly="True" TextWrapping="Wrap" FontSize="11" Text="" HorizontalAlignment="Left" Margin="264,96,0,0" VerticalAlignment="Top" Height="77" Width="194"/>
+        <Button x:Name="ButtonAvailableAt" Content="" BorderThickness="0" Background="White" Click="ButtonAvailableAt_Click" IsEnabled="False"  Foreground="CornflowerBlue" HorizontalAlignment="Left" Margin="264,185,0,0" VerticalAlignment="Top" Width="194"/>
+
 
     </Grid>
 </Window>

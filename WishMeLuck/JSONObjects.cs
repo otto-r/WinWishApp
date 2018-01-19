@@ -41,8 +41,8 @@ namespace WishMeLuck
         public string username { get; set; }
         public string wishListName { get; set; }
         public string wishItemName { get; set; }
-        public object wishItemDesc { get; set; }
-        public object wishItemAvailableAt { get; set; }
+        public string wishItemDesc { get; set; }
+        public string wishItemAvailableAt { get; set; }
     }
 
     public class AddNewWishListObj
