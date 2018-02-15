@@ -36,17 +36,18 @@ namespace WishMeLuck
                 UserName.Content = logInUserObject.user.username;
 
             });
-            listOfWishLists = GetListofLists(logInUserObject.user);
+
 
             if (listOfWishLists != null)
             {
+                listOfWishLists = GetListofLists(logInUserObject.user);
                 FillListOfLists(listOfWishLists);
             }
             else
             {
                 Dispatcher.Invoke(() =>
                 {
-                    LabelErrorMessage.Content = "ERROR: No lists returned";
+                    LabelErrorMessage.Content = "No lists returned";
                 });
             }
         }

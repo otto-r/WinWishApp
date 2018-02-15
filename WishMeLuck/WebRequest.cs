@@ -15,7 +15,8 @@ namespace WishMeLuck
             ASCIIEncoding encoding = new ASCIIEncoding();
             byte[] data = encoding.GetBytes(postData);
 
-            WebRequest request = WebRequest.Create("http://192.168.10.191/test/webservice/" + phpFile);
+            //WebRequest request = WebRequest.Create("http://192.168.10.191/test/webservice/" + phpFile); //Markus Laptop
+            WebRequest request = WebRequest.Create("http://192.168.10.202/webservice/" + phpFile); //Pi
             request.Method = method;
             request.ContentType = "application/x-www-form-urlencoded";
             request.ContentLength = data.Length;

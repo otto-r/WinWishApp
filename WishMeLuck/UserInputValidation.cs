@@ -21,7 +21,6 @@ namespace WishMeLuck
                 matchInput = Regex.Match(userInput, @"^[a-zA-ZåäöÅÄÖ0-9]*$");
             }
 
-
             if (matchInput.Success && !string.IsNullOrWhiteSpace(userInput))
             {
                 return true;
