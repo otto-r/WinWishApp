@@ -21,13 +21,13 @@ namespace WishMeLuck
     public partial class NewWishList : Window
     {
         LogIn logInObjectUsable;
-        ListOfWishLists listOfWishListsObjectUsable;
+        ObjectOfWishLists objectOfWishLits;
 
-        public NewWishList(LogIn logInUserObject, ListOfWishLists listOfWishListsObject)
+        public NewWishList(LogIn logInUserObject, ObjectOfWishLists listOfWishListsObject)
         {
             InitializeComponent();
             logInObjectUsable = logInUserObject;
-            listOfWishListsObjectUsable = listOfWishListsObject;
+            objectOfWishLits = listOfWishListsObject;
 
             Dispatcher.Invoke(() =>
             {
@@ -92,9 +92,9 @@ namespace WishMeLuck
         {
             string userWishListNameInput = TextBoxWishListName.Text.Trim();
 
-            if (listOfWishListsObjectUsable != null)
+            if (objectOfWishLits.wishLists != null)
             {
-                foreach (var item in listOfWishListsObjectUsable.wishLists)
+                foreach (var item in objectOfWishLits.wishLists)
                 {
                     if (userWishListNameInput.ToLower() == item.wishListName.ToLower())
                     {

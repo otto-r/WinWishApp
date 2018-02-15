@@ -22,7 +22,7 @@ namespace WishMeLuck
     }
 
 
-    public class ListOfWishLists
+    public class ObjectOfWishLists
     {
         public int success { get; set; }
         public string msg { get; set; }

@@ -28,10 +28,10 @@
         <Label Grid.Row="7" x:Name="LabelPassword" Content="Password" HorizontalAlignment="Center" VerticalAlignment="Center" Height="23" Width="120"/>
         
         <!--infoBar-->
-        <Rectangle x:Name="InfoBarBG" Fill="White" Visibility="Hidden" HorizontalAlignment="Center" Height="25" Stroke="LightGray" VerticalAlignment="Top" Width="100"/>
+        <Rectangle x:Name="InfoBarBG" Fill="White" Visibility="Hidden" HorizontalAlignment="Center" Height="25" Stroke="LightGray" VerticalAlignment="Top" Width="130"/>
         <Label x:Name="LabelSymbol" Content="✓" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Top" Height="25"/>
         <Label x:Name="LabelText" Content="Copied" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Top" Height="25"/>
-        <Button x:Name="ButtonSeeError" Visibility="Hidden" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Height="25" Click="ButtonSeeError_Click"/>
+        <Button x:Name="ButtonSeeError" Visibility="Hidden" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Top" Width="130" Height="25" Click="ButtonSeeError_Click"/>
         
         <!--Loading thing-->
         <Label x:Name="LabelLoading" Content="Loading..." Background="White" Visibility="Hidden" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
