@@ -92,11 +92,14 @@ namespace WishMeLuck
         {
             string userWishListNameInput = TextBoxWishListName.Text.Trim();
 
-            foreach (var item in listOfWishListsObjectUsable.wishLists)
+            if (listOfWishListsObjectUsable != null)
             {
-                if (userWishListNameInput.ToLower() == item.wishListName.ToLower())
+                foreach (var item in listOfWishListsObjectUsable.wishLists)
                 {
-                    return true;
+                    if (userWishListNameInput.ToLower() == item.wishListName.ToLower())
+                    {
+                        return true;
+                    }
                 }
             }
             return false;

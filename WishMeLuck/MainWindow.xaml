@@ -6,17 +6,49 @@
         xmlns:local="clr-namespace:WishMeLuck"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="Wish - Log In" Height="135" Width="155.205"
+        Title="Wish - Log In" Height="289.8" Width="155.205"
         WindowStartupLocation="CenterScreen">
-    <Grid>
-        <TextBox x:Name="TextBoxUserName" HorizontalAlignment="Left" Height="23" Margin="10,11,0,0" TextWrapping="Wrap" Text="otto" VerticalAlignment="Top" Width="120"/>
-        <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Height="23" Password="123" Width="120"/>
-        <PasswordBox x:Name="PasswordBoxRetype" PasswordChanged="PasswordBoxRetype_PasswordChanged" Visibility="Hidden" HorizontalAlignment="Left" Margin="10,93,0,0" VerticalAlignment="Top" Width="120" Background="White"/>
-        
+    <Grid x:Name="TheGrid">
 
-        <Button x:Name="ButtonLogIn" Click="ButtonLogIn_Click" Content="Log In" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top" Width="53"/>
-        <Button x:Name="ButtonShowRegister" Click="ButtonShowRegister_Click" Content="Register" HorizontalAlignment="Left" Margin="68,68,0,0" VerticalAlignment="Top" Width="62"/>
-        <Button x:Name="ButtonRegister" Click="ButtonRegister_Click" Visibility="Hidden" Content="Register" HorizontalAlignment="Left" Margin="68,68,0,0" VerticalAlignment="Top" Width="62"/>
+
+
+        <TextBox Grid.Row="0" x:Name="TextBoxUserName" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="NoWrap" Text="otto" Height="23" Width="120" />
+        <PasswordBox Grid.Row="1" x:Name="PasswordBox" HorizontalAlignment="Center" VerticalAlignment="Center" Height="23" Password="123" Width="120"/>
+
+        <Button IsDefault="True" Grid.Row="2" x:Name="ButtonLogIn" Click="ButtonLogIn_Click" Content="Log In" HorizontalAlignment="Center" VerticalAlignment="Center" Width="45" Margin="14,7.4,81.8,5.4" ToolTip="Press 'Enter' to Login"/>
+        <Button  Grid.Row="2" x:Name="ButtonRegister" Click="ButtonRegister_Click" Content="Register" HorizontalAlignment="Center" VerticalAlignment="Center" Width="45" Margin="72,7.4,14.8,5.4"/>
+
+        <PasswordBox Grid.Row="3" x:Name="PasswordBoxRetype" PasswordChanged="PasswordBoxRetype_PasswordChanged" Visibility="Visible" Height="23" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Background="White"/>
+
+        <!--<Button Grid.Row="4" x:Name="ButtonRegister" Click="ButtonRegister_Click" Visibility="Visible" Content="Register" HorizontalAlignment="Center" VerticalAlignment="Center" Width="62"/>-->
+
+        <Label Grid.Row="4" x:Name="LabelEmail" Visibility="Visible" Content="E-mail" HorizontalAlignment="Center" VerticalAlignment="Center" Height="23" Width="120"/>
+        <TextBox Grid.Row="5" x:Name="TextBoxEmail" HorizontalAlignment="Center" Height="23" TextWrapping="NoWrap" Text="E-mail" VerticalAlignment="Center" Width="120"/>
+        <TextBox Grid.Row="6" x:Name="TextBoxEmailRetype" HorizontalAlignment="Center" Height="23" TextWrapping="NoWrap" Text="Re-type E-mail" VerticalAlignment="Center" Width="120"/>
+        <Label Grid.Row="7" x:Name="LabelPassword" Content="Password" HorizontalAlignment="Center" VerticalAlignment="Center" Height="23" Width="120"/>
+        
+        <!--infoBar-->
+        <Rectangle x:Name="InfoBarBG" Fill="White" Visibility="Hidden" HorizontalAlignment="Center" Height="25" Stroke="LightGray" VerticalAlignment="Top" Width="100"/>
+        <Label x:Name="LabelSymbol" Content="✓" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Top" Height="25"/>
+        <Label x:Name="LabelText" Content="Copied" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Top" Height="25"/>
+        <Button x:Name="ButtonSeeError" Visibility="Hidden" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Height="25" Click="ButtonSeeError_Click"/>
+        
+        <!--Loading thing-->
+        <Label x:Name="LabelLoading" Content="Loading..." Background="White" Visibility="Hidden" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
     </Grid>
 </Window>

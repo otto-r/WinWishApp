@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Newtonsoft.Json;
 
 
@@ -24,6 +13,13 @@ namespace WishMeLuck
     /// </summary>
     public partial class MainWindow : Window
     {
+        bool showRegistrationFields = false;
+        bool loadingLabelOn = false;
+        string userName;
+        string password;
+        string eMail;
+        string errorMessage = "";
+
         public MainWindow()
         {
             InitializeComponent();
@@ -31,38 +27,109 @@ namespace WishMeLuck
 
         private void ButtonLogIn_Click(object sender, RoutedEventArgs e)
         {
-            string userName;
-            string password;
-
-            userName = TextBoxUserName.Text;
-            password = PasswordBox.Password;
-            HttpRequest(userName, password);
+            if (showRegistrationFields == true)
+            {
+                showRegistrationFields = false;
+                ButtonLogIn.Content = "Login";
+                LabelPassword.SetValue(Grid.RowProperty, 7);        // 7=>1
+                PasswordBox.SetValue(Grid.RowProperty, 1);          // 1=>2
+                PasswordBoxRetype.SetValue(Grid.RowProperty, 6);    // 6=>3
+                ButtonLogIn.SetValue(Grid.RowProperty, 2);          // 2=>7
+                ButtonRegister.SetValue(Grid.RowProperty, 2);       // 2=>7
+            }
+            else
+            {
+                loadingLabelOn = true;
+                Task.Run(() =>
+                {
+                    LoadingLabelAnimated();
+                });
+                userName = TextBoxUserName.Text;
+                password = PasswordBox.Password;
+                HttpRequest(userName, password);
+            }
         }
 
         private void ButtonRegister_Click(object sender, RoutedEventArgs e)
         {
-            if (UserInputValidation.ValidCharacters(TextBoxUserName.Text, false))
+            userName = TextBoxUserName.Text;
+            password = PasswordBox.Password;
+            eMail = TextBoxEmail.Text;
+            if (showRegistrationFields == false)
             {
-                //Register method here
+                showRegistrationFields = true;
+                ShowRegistration();
             }
             else
             {
-                MessageBox.Show("No special characters allowed.\n- Allowed: A-Z, a-z and 0-9");
+                if (UserInputValidation.ValidCharacters(userName, false))
+                {
+                    Task.Run(() =>
+                    {
+                        string postData = "un=" + userName + "&pw=" + password + "&email=" + eMail;
+                        string method = "POST";
+                        string phpFileName = "regUser.php";
+                        //WebReq.WebRq(postData, method, phpFileName);
+                        string jsonStr = "";
+                        string error = "";
+                        try
+                        {
+                            jsonStr = WebReq.WebRq(postData, method, phpFileName);
+                        }
+                        catch (System.Exception err)
+                        {
+                            error = err.ToString();
+                            Task.Run(() =>
+                            {
+                                InfoBarAsync("", error);
+                                errorMessage = error;
+                                loadingLabelOn = false;
+                            });
+                        }
+
+                        LogIn logInUserObject = JsonConvert.DeserializeObject<LogIn>(jsonStr);
+
+
+                        if (logInUserObject.success == 1)
+                        {
+                            Dispatcher.Invoke(() =>
+                            {
+                                MainLogIn mainLogInWindow = new MainLogIn(logInUserObject);
+                                mainLogInWindow.Show();
+                                this.Close();
+                            });
+                        }
+                        else if (logInUserObject.success != 1)
+                        {
+                            Task.Run(() =>
+                            {
+                                InfoBarAsync("", logInUserObject.msg);
+                                loadingLabelOn = false;
+                            });
+                        }
+
+                    });
+                }
             }
         }
 
-        private void ButtonShowRegister_Click(object sender, RoutedEventArgs e)
+        private void ShowRegistration()
         {
             Dispatcher.Invoke(() =>
             {
-                PasswordBoxRetype.Margin = new Thickness(10, 68, 0, 0);
-                ButtonLogIn.Margin = new Thickness(10, 93, 0, 0);
-                ButtonRegister.Margin = new Thickness(68, 93, 0, 0);
-                ButtonShowRegister.Margin = new Thickness(68, 93, 0, 0);
+                ButtonLogIn.Content = "Back";
+                LabelPassword.SetValue(Grid.RowProperty, 1);        // 7=>1
+                PasswordBox.SetValue(Grid.RowProperty, 2);          // 1=>2
+                PasswordBoxRetype.SetValue(Grid.RowProperty, 3);    // 6=>3
+                ButtonLogIn.SetValue(Grid.RowProperty, 7);          // 2=>7
+                ButtonRegister.SetValue(Grid.RowProperty, 7);       // 2=>7
+
+                //Application.Current.MainWindow.Height = 275;
+
+                LabelEmail.Visibility = Visibility.Visible;
                 PasswordBoxRetype.Visibility = Visibility.Visible;
-                Application.Current.MainWindow.Height = 160;
-                ButtonShowRegister.Visibility = Visibility.Hidden;
                 ButtonRegister.Visibility = Visibility.Visible;
+
                 PasswordBoxRetype.Focus();
             });
         }
@@ -76,9 +143,25 @@ namespace WishMeLuck
                 string method = "POST";
                 string phpFileName = "login.php";
 
-                string jsonStr = WebReq.WebRq(postData, method, phpFileName);
+                string jsonStr = "";
+                string error = "";
+                try
+                {
+                    jsonStr = WebReq.WebRq(postData, method, phpFileName);
+                }
+                catch (System.Exception e)
+                {
+                    error = e.ToString();
+                    Task.Run(() =>
+                    {
+                        InfoBarAsync("", error);
+                        errorMessage = error;
+                        loadingLabelOn = false;
+                    });
+                }
 
                 LogIn logInUserObject = JsonConvert.DeserializeObject<LogIn>(jsonStr);
+
 
                 if (logInUserObject.success == 1)
                 {
@@ -87,6 +170,14 @@ namespace WishMeLuck
                         MainLogIn mainLogInWindow = new MainLogIn(logInUserObject);
                         mainLogInWindow.Show();
                         this.Close();
+                    });
+                }
+                else if (logInUserObject.success != 1)
+                {
+                    Task.Run(() =>
+                    {
+                        InfoBarAsync("", logInUserObject.msg);
+                        loadingLabelOn = false;
                     });
                 }
             });
@@ -103,6 +194,86 @@ namespace WishMeLuck
             {
                 PasswordBoxRetype.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom(UserInputValidation.PasswordStrengthTest(PasswordBoxRetype.Password)));
             });
+        }
+
+        private async Task InfoBarAsync(string symbol, string message)
+        {
+
+            int infoBarHeight = 0;
+            Dispatcher.Invoke(() =>
+            {
+                string shortenedMessage = message.Substring(0, 12) + "...";
+                ButtonSeeError.Visibility = Visibility.Visible;
+                InfoBarBG.Visibility = Visibility.Visible;
+                LabelSymbol.Foreground = Brushes.Green;
+
+                LabelSymbol.Content = symbol;
+                LabelText.Content = shortenedMessage;
+                LabelSymbol.Visibility = Visibility.Visible;
+                LabelText.Visibility = Visibility.Visible;
+            });
+
+            async Task PutTaskDelay()
+            {
+                await Task.Delay(15);
+            }
+
+
+            for (int i = 0; i < 6; i++)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    ButtonSeeError.Height = infoBarHeight;
+                    InfoBarBG.Height = infoBarHeight;
+                    LabelSymbol.Height = infoBarHeight;
+                    LabelText.Height = infoBarHeight;
+                });
+                infoBarHeight += 5;
+                await PutTaskDelay();
+            }
+            await Task.Delay(3000);
+            Dispatcher.Invoke(() =>
+            {
+                InfoBarBG.Visibility = Visibility.Hidden;
+                LabelSymbol.Foreground = Brushes.Green;
+
+                ButtonSeeError.Visibility = Visibility.Hidden;
+                LabelSymbol.Content = "";
+                LabelText.Content = "";
+                LabelSymbol.Visibility = Visibility.Hidden;
+                LabelText.Visibility = Visibility.Hidden;
+            });
+        }
+
+        private void ButtonLogIn_DragEnter(object sender, DragEventArgs e)
+        {
+
+        }
+        async Task LoadingLabelAnimated()
+        {
+            while (loadingLabelOn)
+            {
+                Dispatcher.Invoke(() => { LabelLoading.Visibility = Visibility.Visible; });
+                await Dispatcher.Invoke(async () =>
+                {
+                    await Task.Delay(500);
+                    LabelLoading.Content = "Loading";
+                    await Task.Delay(500);
+                    LabelLoading.Content = "Loading.";
+                    await Task.Delay(500);
+                    LabelLoading.Content = "Loading..";
+                    await Task.Delay(500);
+                    LabelLoading.Content = "Loading...";
+                });
+            }
+            Dispatcher.Invoke(() => { LabelLoading.Visibility = Visibility.Hidden; });
+
+            return;
+        }
+
+        private void ButtonSeeError_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(errorMessage);
         }
     }
 }
