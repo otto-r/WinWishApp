@@ -16,6 +16,7 @@
         <Button x:Name="ButtonAddNewWishList" Content="New Wish List" Click="ButtonAddNewWishList_Click" HorizontalAlignment="Left" Margin="10,209,0,0" VerticalAlignment="Top" Width="101"/>
         <Button x:Name="ButtonDeleteWishList" Content="DeleteWish List" Click="ButtonDeleteWishList_Click" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" Width="101"/>
         <Button x:Name="ButtonUpdate" Click="ButtonUpdate_Click" Content="Update" HorizontalAlignment="Left" Margin="397,10,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="ButtonShareList" Click="ButtonShareList_Click" Content="Share List" HorizontalAlignment="Left" Margin="317,10,0,0" VerticalAlignment="Top" Width="75"/>
         <Label x:Name="LabelErrorMessage" Content="" HorizontalAlignment="Left" Margin="231,24,0,0" VerticalAlignment="Top"/>
         <Button x:Name="ButtonAddNewItem" Click="ButtonAddNewItem_Click" Content="Add Item" HorizontalAlignment="Left" Margin="116,209,0,0" VerticalAlignment="Top" Width="66"/>
         <Button x:Name="ButtonDeleteItem" Click="ButtonDeleteItem_Click" Content="Delete Item" HorizontalAlignment="Left" Margin="188,209,0,0" VerticalAlignment="Top" Width="66"/>

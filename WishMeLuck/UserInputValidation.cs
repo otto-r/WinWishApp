@@ -30,10 +30,11 @@ namespace WishMeLuck
 
             if (matchInput.Success && !string.IsNullOrWhiteSpace(userInput))
             {
-                inputObject
+                inputObject.ValidInput = true;
             }
             else
             {
+                inputObject.ValidInput = false;
             }
 
             return inputObject;

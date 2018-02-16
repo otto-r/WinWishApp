@@ -31,7 +31,6 @@ namespace WishMeLuck
             Dispatcher.Invoke(() =>
             {
                 UserName.Content = logInUserObject.user.username;
-
             });
 
             objectOfWishLists = GetListofLists(logInUserObject.user);
@@ -234,6 +233,11 @@ namespace WishMeLuck
                     }
                 }
             }
+        }
+
+        private void ButtonShareList_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

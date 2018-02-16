@@ -64,7 +64,7 @@ namespace WishMeLuck
             }
             else
             {
-                if (UserInputValidation.InputValidator(userName, false))
+                if (UserInputValidation.InputValidator(userName, false).ValidInput)
                 {
                     Task.Run(() =>
                     {
