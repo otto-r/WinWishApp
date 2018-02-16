@@ -13,7 +13,7 @@ namespace WishMeLuck
         public string msg { get; set; }
         public User user { get; set; }
     }
-
+    
     public class User
     {
         public string username { get; set; }

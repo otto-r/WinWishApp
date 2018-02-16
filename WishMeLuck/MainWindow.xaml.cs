@@ -8,9 +8,6 @@ using Newtonsoft.Json;
 
 namespace WishMeLuck
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         bool showRegistrationFields = false;
@@ -67,7 +64,7 @@ namespace WishMeLuck
             }
             else
             {
-                if (UserInputValidation.ValidCharacters(userName, false))
+                if (UserInputValidation.InputValidator(userName, false))
                 {
                     Task.Run(() =>
                     {
@@ -253,7 +250,7 @@ namespace WishMeLuck
                 infoBarHeight += 5;
                 await PutTaskDelay();
             }
-            await Task.Delay(3000);
+            await Task.Delay(3500);
             Dispatcher.Invoke(() =>
             {
                 InfoBarBG.Visibility = Visibility.Hidden;

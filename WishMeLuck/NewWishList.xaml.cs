@@ -38,7 +38,7 @@ namespace WishMeLuck
         private void ButtonAddNewList_Click(object sender, RoutedEventArgs e)
         {
             string userWishListNameInput = TextBoxWishListName.Text.Trim();
-            if (UserInputValidation.ValidCharacters(userWishListNameInput, true) && !SeeIfWishListNameExists())
+            if (UserInputValidation.InputValidator(userWishListNameInput, true) && !SeeIfWishListNameExists())
             {
                 Task.Run(() =>
                 {

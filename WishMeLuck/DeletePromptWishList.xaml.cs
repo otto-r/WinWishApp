@@ -15,19 +15,15 @@ using System.Windows.Shapes;
 
 namespace WishMeLuck
 {
-    /// <summary>
-    /// Interaction logic for Window1.xaml
-    /// </summary>
     public partial class DeletePromptWishList : Window
     {
         LogIn logInObject;
         WishList wishList;
         public DeletePromptWishList(LogIn logInObjectInput, WishList wishListInput)
         {
-
             logInObject = logInObjectInput;
             wishList = wishListInput;
-
+            
             InitializeComponent();
             Dispatcher.Invoke(() =>
             {

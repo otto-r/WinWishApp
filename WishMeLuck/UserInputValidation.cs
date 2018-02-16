@@ -7,10 +7,17 @@ using System.Threading.Tasks;
 
 namespace WishMeLuck
 {
+    public class InputObject
+    {
+        public bool ValidInput { get; set; }
+        public string Message { get; set; }
+    }
+
     public class UserInputValidation
     {
-        public static bool ValidCharacters(string userInput, bool allowSpace)
+        public static InputObject InputValidator(string userInput, bool allowSpace)
         {
+            InputObject inputObject = new InputObject();
             Match matchInput;
             if (allowSpace)
             {
@@ -23,13 +30,15 @@ namespace WishMeLuck
 
             if (matchInput.Success && !string.IsNullOrWhiteSpace(userInput))
             {
-                return true;
+                inputObject
             }
             else
             {
-                return false;
             }
+
+            return inputObject;
         }
+
         public static string PasswordStrengthTest(string password)  //Returns HEX color code
         {
 

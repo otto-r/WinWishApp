@@ -18,9 +18,6 @@ using System.Windows.Shapes;
 
 namespace WishMeLuck
 {
-    /// <summary>
-    /// Interaction logic for MainLogIn.xaml
-    /// </summary>
     public partial class MainLogIn : Window
     {
         LogIn LogInObj;
