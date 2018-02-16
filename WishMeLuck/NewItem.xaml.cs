@@ -5,9 +5,7 @@ using System.Windows.Media;
 
 namespace WishMeLuck
 {
-    /// <summary>
-    /// Interaction logic for NewItem.xaml
-    /// </summary>
+    public delegate void UpdateList();
     public partial class NewItem : Window
     {
         LogInObject logInObjectUsable;
@@ -56,7 +54,7 @@ namespace WishMeLuck
                     string method = "POST";
                     string phpFileName = "addWish.php";
 
-                    string jsonStr = WebReq.WebRq(postData, method, phpFileName,"");
+                    string jsonStr = WebReq.WebRq(postData, method, phpFileName, "");
 
                     var addNewWishObj = JsonConvert.DeserializeObject<AddNewWishObj>(jsonStr);
 
@@ -66,7 +64,7 @@ namespace WishMeLuck
                         {
                             LabelUserInteractionFeedBack.Foreground = Brushes.LightGreen;
                             LabelUserInteractionFeedBack.Content = "Successful";
-
+                            
                             this.Close();
                         });
                     }

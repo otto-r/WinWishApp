@@ -18,13 +18,13 @@ using System.Windows.Shapes;
 
 namespace WishMeLuck
 {
-    public partial class MainLogIn : Window
+    public partial class LoggedInWindow : Window
     {
         LogInObject LogInObj;
         ObjectOfWishLists objectOfWishLists;
         string selectedItemAvailableAt;
 
-        public MainLogIn(LogInObject logInUserObject)
+        public LoggedInWindow(LogInObject logInUserObject)
         {
             LogInObj = logInUserObject;
             InitializeComponent();
@@ -68,7 +68,7 @@ namespace WishMeLuck
             });
         }
 
-        private void FillListOfLists(ObjectOfWishLists ListOfLists)
+        public void FillListOfLists(ObjectOfWishLists ListOfLists)
         {
             if (ListOfLists.wishLists != null)
             {
@@ -90,7 +90,7 @@ namespace WishMeLuck
             }
         }
 
-        private void FillWishList(ObjectOfWishLists ListOfLists, string wishListName)
+        public void FillWishList(ObjectOfWishLists ListOfLists, string wishListName)
         {
             Dispatcher.Invoke(() =>
             {
@@ -148,7 +148,6 @@ namespace WishMeLuck
                             {
                                 ButtonAvailableAt.IsEnabled = false;
                             }
-
 
                             LabelItemName.Content = item.wishItemName;
                             LabelItemDescrition.Text = item.wishItemDesc.ToString();

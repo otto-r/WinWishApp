@@ -5,14 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WishMeLuck"
         WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
         mc:Ignorable="d"
         Title="Share" Height="300" Width="188.939">
     <Grid>
         <ComboBox x:Name="ComboBoxSelectWishList" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Grid.Column="1" Grid.Row="0" />
-        <TextBox x:Name="TextBoxUsername" HorizontalAlignment="Center" Height="23" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="120"/>
-
-        <Button x:Name="ButtonShare" Click="ButtonShare_Click" Content="Share" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="5" VerticalAlignment="Center" Width="75"/>
+        
+        <TextBox x:Name="TextBoxUsername" HorizontalAlignment="Center" Height="23" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="70" Margin="31,12.2,81.4,9.6"/>
+        <Button x:Name="ButtonAdd" Content="Add" Click="ButtonAdd_Click" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Height="23" Width="40" Margin="111,0,25,0"/>
+        
         <ListBox x:Name="ListBoxFriends" HorizontalAlignment="Center" Height="100" Grid.Row="2" VerticalAlignment="Center" Width="120" SelectionMode="Multiple"/>
+        <Button x:Name="ButtonShare" Click="ButtonShare_Click" Content="Share" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="5" VerticalAlignment="Center" Width="75"/>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />

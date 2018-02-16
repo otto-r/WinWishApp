@@ -13,7 +13,7 @@ namespace WishMeLuck
         public string msg { get; set; }
         public User user { get; set; }
     }
-    
+
     public class User
     {
         public string username { get; set; }
@@ -67,5 +67,34 @@ namespace WishMeLuck
         public string msg { get; set; }
     }
 
+
+    public class FriendListRequest
+    {
+        public string un { get; set; }
+        public string wln { get; set; }
+        public List<string> sun { get; set; }
+    }
+
+
+    public class ShareObject
+    {
+        public int success { get; set; }
+        public string msg { get; set; }
+        public List<Friend> friends { get; set; }
+    }
+
+    public class Friend
+    {
+        public string shareToUser { get; set; }
+        public string msg { get; set; }
+    }
+
+
+    public class SharedListObject
+    {
+        public int success { get; set; }
+        public string msg { get; set; }
+        public List<string> friends { get; set; }
+    }
 
 }

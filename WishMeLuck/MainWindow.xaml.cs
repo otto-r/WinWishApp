@@ -99,7 +99,7 @@ namespace WishMeLuck
                             {
                                 Dispatcher.Invoke(() =>
                                 {
-                                    MainLogIn mainLogInWindow = new MainLogIn(logInUserObject);
+                                    LoggedInWindow mainLogInWindow = new LoggedInWindow(logInUserObject);
                                     mainLogInWindow.Show();
                                     this.Close();
                                 });
@@ -186,7 +186,7 @@ namespace WishMeLuck
                 {
                     Dispatcher.Invoke(() =>
                     {
-                        MainLogIn mainLogInWindow = new MainLogIn(logInUserObject);
+                        LoggedInWindow mainLogInWindow = new LoggedInWindow(logInUserObject);
                         mainLogInWindow.Show();
                         this.Close();
                     });
