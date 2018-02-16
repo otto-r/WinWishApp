@@ -70,6 +70,9 @@
     <Compile Include="Register.cs" />
     <Compile Include="UserInputValidation.cs" />
     <Compile Include="WebRequest.cs" />
+    <Compile Include="DeletePromptWishList.xaml.cs">
+      <DependentUpon>DeletePromptWishList.xaml</DependentUpon>
+    </Compile>
     <Page Include="DeletePrompt.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -98,6 +101,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NewWishList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DeletePromptWishList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

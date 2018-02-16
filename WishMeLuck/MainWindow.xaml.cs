@@ -17,7 +17,9 @@ namespace WishMeLuck
         bool loadingLabelOn = false;
         string userName;
         string password;
+        string reTypePassword;
         string eMail;
+        string reTypeEMail;
         string errorMessage = "";
 
         public MainWindow()
@@ -54,7 +56,10 @@ namespace WishMeLuck
         {
             userName = TextBoxUserName.Text;
             password = PasswordBox.Password;
+            reTypePassword = PasswordBoxRetype.Password;
             eMail = TextBoxEmail.Text;
+            reTypeEMail = TextBoxEmailRetype.Text;
+
             if (showRegistrationFields == false)
             {
                 showRegistrationFields = true;
@@ -72,40 +77,57 @@ namespace WishMeLuck
                         //WebReq.WebRq(postData, method, phpFileName);
                         string jsonStr = "";
                         string error = "";
-                        try
-                        {
-                            jsonStr = WebReq.WebRq(postData, method, phpFileName);
-                        }
-                        catch (System.Exception err)
-                        {
-                            error = err.ToString();
-                            Task.Run(() =>
-                            {
-                                InfoBarAsync("", error);
-                                errorMessage = error;
-                                loadingLabelOn = false;
-                            });
-                        }
 
-                        LogIn logInUserObject = JsonConvert.DeserializeObject<LogIn>(jsonStr);
-
-
-                        if (logInUserObject.success == 1)
+                        if (eMail == reTypeEMail && password == reTypePassword)
                         {
-                            Dispatcher.Invoke(() =>
+                            try
                             {
-                                MainLogIn mainLogInWindow = new MainLogIn(logInUserObject);
-                                mainLogInWindow.Show();
-                                this.Close();
-                            });
+                                jsonStr = WebReq.WebRq(postData, method, phpFileName);
+                            }
+                            catch (System.Exception err)
+                            {
+                                error = err.ToString();
+                                Task.Run(() =>
+                                {
+                                    InfoBarAsync("", error);
+                                    errorMessage = error;
+                                    loadingLabelOn = false;
+                                });
+                            }
+
+                            LogIn logInUserObject = JsonConvert.DeserializeObject<LogIn>(jsonStr);
+
+
+                            if (logInUserObject.success == 1)
+                            {
+                                Dispatcher.Invoke(() =>
+                                {
+                                    MainLogIn mainLogInWindow = new MainLogIn(logInUserObject);
+                                    mainLogInWindow.Show();
+                                    this.Close();
+                                });
+                            }
+                            else if (logInUserObject.success != 1)
+                            {
+                                Task.Run(() =>
+                                {
+                                    InfoBarAsync("", logInUserObject.msg);
+                                    loadingLabelOn = false;
+                                });
+                            }
                         }
-                        else if (logInUserObject.success != 1)
+                        else
                         {
-                            Task.Run(() =>
+                            if (eMail != reTypeEMail)
                             {
-                                InfoBarAsync("", logInUserObject.msg);
-                                loadingLabelOn = false;
-                            });
+                                InfoBarAsync("", "E-mails do not match.");
+                                errorMessage = "E-mails do not match.";
+                            }
+                            else
+                            {
+                                InfoBarAsync("","Passwords do not match.");
+                                errorMessage = "Passwords do not match.";
+                            }
                         }
 
                     });
@@ -202,7 +224,7 @@ namespace WishMeLuck
             int infoBarHeight = 0;
             Dispatcher.Invoke(() =>
             {
-                string shortenedMessage = message.Substring(0, 12) + "...";
+                string shortenedMessage = message.Substring(0, 20) + "...";
                 ButtonSeeError.Visibility = Visibility.Visible;
                 InfoBarBG.Visibility = Visibility.Visible;
                 LabelSymbol.Foreground = Brushes.Green;

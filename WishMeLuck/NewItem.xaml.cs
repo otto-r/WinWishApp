@@ -11,9 +11,9 @@ namespace WishMeLuck
     public partial class NewItem : Window
     {
         LogIn logInObjectUsable;
-        ListOfWishLists listOfWishListsObjectUsable;
+        ObjectOfWishLists listOfWishListsObjectUsable;
 
-        public NewItem(LogIn logInUserObject, ListOfWishLists listOfWishListsObject, string selectedList)
+        public NewItem(LogIn logInUserObject, ObjectOfWishLists listOfWishListsObject, string selectedList)
         {
             logInObjectUsable = logInUserObject;
             listOfWishListsObjectUsable = listOfWishListsObject;

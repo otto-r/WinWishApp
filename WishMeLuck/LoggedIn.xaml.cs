@@ -24,7 +24,7 @@ namespace WishMeLuck
     public partial class MainLogIn : Window
     {
         LogIn LogInObj;
-        ListOfWishLists listOfWishLists;
+        ObjectOfWishLists objectOfWishLists;
         string selectedItemAvailableAt;
 
         public MainLogIn(LogIn logInUserObject)
@@ -37,22 +37,12 @@ namespace WishMeLuck
 
             });
 
+            objectOfWishLists = GetListofLists(logInUserObject.user);
+            FillListOfLists(objectOfWishLists);
 
-            if (listOfWishLists != null)
-            {
-                listOfWishLists = GetListofLists(logInUserObject.user);
-                FillListOfLists(listOfWishLists);
-            }
-            else
-            {
-                Dispatcher.Invoke(() =>
-                {
-                    LabelErrorMessage.Content = "No lists returned";
-                });
-            }
         }
 
-        private ListOfWishLists GetListofLists(User user)
+        private ObjectOfWishLists GetListofLists(User user)
         {
             string postData = "un=" + user.username;
             string method = "POST";
@@ -60,7 +50,7 @@ namespace WishMeLuck
 
             string jsonStr = WebReq.WebRq(postData, method, phpFileName);
 
-            ListOfWishLists ListOfLists = JsonConvert.DeserializeObject<ListOfWishLists>(jsonStr);
+            ObjectOfWishLists ListOfLists = JsonConvert.DeserializeObject<ObjectOfWishLists>(jsonStr);
 
             return ListOfLists;
         }
@@ -74,7 +64,7 @@ namespace WishMeLuck
             else
             {
                 string selectedWishList = WishListOfLists.SelectedItem.ToString();
-                FillWishList(listOfWishLists, selectedWishList);
+                FillWishList(objectOfWishLists, selectedWishList);
             }
             Task.Run(() =>
             {
@@ -82,20 +72,29 @@ namespace WishMeLuck
             });
         }
 
-        private void FillListOfLists(ListOfWishLists ListOfLists)
+        private void FillListOfLists(ObjectOfWishLists ListOfLists)
         {
-            Dispatcher.Invoke(() =>
+            if (ListOfLists.wishLists != null)
             {
-                //WishListOfLists.SelectedItem = -1;
-                WishListOfLists.Items.Clear();
-                foreach (var item in ListOfLists.wishLists)
+                Dispatcher.Invoke(() =>
                 {
-                    WishListOfLists.Items.Add(item.wishListName);
-                }
-            });
+                    WishListOfLists.Items.Clear();
+                    foreach (var item in ListOfLists.wishLists)
+                    {
+                        WishListOfLists.Items.Add(item.wishListName);
+                    }
+                });
+            }
+            else
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    LabelErrorMessage.Content = "No lists returned";
+                });
+            }
         }
 
-        private void FillWishList(ListOfWishLists ListOfLists, string wishListName)
+        private void FillWishList(ObjectOfWishLists ListOfLists, string wishListName)
         {
             Dispatcher.Invoke(() =>
             {
@@ -136,7 +135,7 @@ namespace WishMeLuck
             Dispatcher.Invoke(() =>
             {
                 //WishListItem.Items.Clear();
-                foreach (var wishList in listOfWishLists.wishLists)
+                foreach (var wishList in objectOfWishLists.wishLists)
                 {
                     foreach (var item in wishList.wishList)
                     {
@@ -166,17 +165,17 @@ namespace WishMeLuck
 
         private void ButtonAddNewWishList_Click(object sender, RoutedEventArgs e)
         {
-            NewWishList newWishList = new NewWishList(LogInObj, listOfWishLists);
+            NewWishList newWishList = new NewWishList(LogInObj, objectOfWishLists);
             newWishList.Show();
         }
 
         private void ButtonUpdate_Click(object sender, RoutedEventArgs e)
         {
-            listOfWishLists = GetListofLists(LogInObj.user);
+            objectOfWishLists = GetListofLists(LogInObj.user);
 
-            if (listOfWishLists != null)
+            if (objectOfWishLists != null)
             {
-                FillListOfLists(listOfWishLists);
+                FillListOfLists(objectOfWishLists);
             }
             else
             {
@@ -194,22 +193,25 @@ namespace WishMeLuck
             {
                 selectedWishListString = WishListOfLists.SelectedItem.ToString();
             }
-            NewItem newItem = new NewItem(LogInObj, listOfWishLists, selectedWishListString);
+            NewItem newItem = new NewItem(LogInObj, objectOfWishLists, selectedWishListString);
             newItem.Show();
         }
 
         private void ButtonDeleteItem_Click(object sender, RoutedEventArgs e)
         {
-            string selectedItem = WishListBox.SelectedItem.ToString();
-
-            foreach (var wishList in listOfWishLists.wishLists)
+            if (objectOfWishLists.wishLists != null && WishListBox.SelectedItem != null)
             {
-                foreach (var wishItem in wishList.wishList)
+                string selectedItem = WishListBox.SelectedItem.ToString();
+
+                foreach (var wishList in objectOfWishLists.wishLists)
                 {
-                    if (wishItem.wishItemName == selectedItem)
+                    foreach (var wishItem in wishList.wishList)
                     {
-                        DeletePrompt delete = new DeletePrompt(LogInObj, wishItem);
-                        delete.Show();
+                        if (wishItem.wishItemName == selectedItem)
+                        {
+                            DeletePrompt delete = new DeletePrompt(LogInObj, wishItem);
+                            delete.Show();
+                        }
                     }
                 }
             }
@@ -218,6 +220,23 @@ namespace WishMeLuck
         private void ButtonAvailableAt_Click(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process.Start(selectedItemAvailableAt);
+        }
+
+        private void ButtonDeleteWishList_Click(object sender, RoutedEventArgs e)
+        {
+            if (objectOfWishLists.wishLists != null && WishListOfLists.SelectedItem != null)
+            {
+                string selectedItem = WishListOfLists.SelectedItem.ToString();
+
+                foreach (var wishList in objectOfWishLists.wishLists)
+                {
+                    if (wishList.wishListName == selectedItem)
+                    {
+                        DeletePromptWishList delete = new DeletePromptWishList(LogInObj, wishList);
+                        delete.Show();
+                    }
+                }
+            }
         }
     }
 }
