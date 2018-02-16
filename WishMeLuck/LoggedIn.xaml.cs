@@ -20,11 +20,11 @@ namespace WishMeLuck
 {
     public partial class MainLogIn : Window
     {
-        LogIn LogInObj;
+        LogInObject LogInObj;
         ObjectOfWishLists objectOfWishLists;
         string selectedItemAvailableAt;
 
-        public MainLogIn(LogIn logInUserObject)
+        public MainLogIn(LogInObject logInUserObject)
         {
             LogInObj = logInUserObject;
             InitializeComponent();
@@ -44,7 +44,7 @@ namespace WishMeLuck
             string method = "POST";
             string phpFileName = "getLists.php";
 
-            string jsonStr = WebReq.WebRq(postData, method, phpFileName);
+            string jsonStr = WebReq.WebRq(postData, method, phpFileName, "");
 
             ObjectOfWishLists ListOfLists = JsonConvert.DeserializeObject<ObjectOfWishLists>(jsonStr);
 
@@ -237,7 +237,20 @@ namespace WishMeLuck
 
         private void ButtonShareList_Click(object sender, RoutedEventArgs e)
         {
-
+            Dispatcher.Invoke(() =>
+            {
+                string selectedList;
+                if (WishListOfLists.SelectedIndex == -1)
+                {
+                    selectedList = "";
+                }
+                else
+                {
+                    selectedList = WishListOfLists.SelectedItem.ToString();
+                }
+                ShareWindow shareWindow = new ShareWindow(LogInObj, objectOfWishLists, selectedList);
+                shareWindow.Show();
+            });
         }
     }
 }

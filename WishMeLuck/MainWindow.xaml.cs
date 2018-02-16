@@ -79,7 +79,7 @@ namespace WishMeLuck
                         {
                             try
                             {
-                                jsonStr = WebReq.WebRq(postData, method, phpFileName);
+                                jsonStr = WebReq.WebRq(postData, method, phpFileName, "");
                             }
                             catch (System.Exception err)
                             {
@@ -92,7 +92,7 @@ namespace WishMeLuck
                                 });
                             }
 
-                            LogIn logInUserObject = JsonConvert.DeserializeObject<LogIn>(jsonStr);
+                            LogInObject logInUserObject = JsonConvert.DeserializeObject<LogInObject>(jsonStr);
 
 
                             if (logInUserObject.success == 1)
@@ -166,7 +166,7 @@ namespace WishMeLuck
                 string error = "";
                 try
                 {
-                    jsonStr = WebReq.WebRq(postData, method, phpFileName);
+                    jsonStr = WebReq.WebRq(postData, method, phpFileName,"");
                 }
                 catch (System.Exception e)
                 {
@@ -179,7 +179,7 @@ namespace WishMeLuck
                     });
                 }
 
-                LogIn logInUserObject = JsonConvert.DeserializeObject<LogIn>(jsonStr);
+                LogInObject logInUserObject = JsonConvert.DeserializeObject<LogInObject>(jsonStr);
 
 
                 if (logInUserObject.success == 1)

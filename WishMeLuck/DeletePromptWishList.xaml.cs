@@ -17,9 +17,9 @@ namespace WishMeLuck
 {
     public partial class DeletePromptWishList : Window
     {
-        LogIn logInObject;
+        LogInObject logInObject;
         WishList wishList;
-        public DeletePromptWishList(LogIn logInObjectInput, WishList wishListInput)
+        public DeletePromptWishList(LogInObject logInObjectInput, WishList wishListInput)
         {
             logInObject = logInObjectInput;
             wishList = wishListInput;
@@ -39,7 +39,7 @@ namespace WishMeLuck
                 string method = "POST";
                 string phpFileName = "delWishList.php";
 
-                string jsonStr = WebReq.WebRq(postData, method, phpFileName);
+                string jsonStr = WebReq.WebRq(postData, method, phpFileName, "default");
 
                 var deleteItemObj = JsonConvert.DeserializeObject<DeleteItemObj>(jsonStr);
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace WishMeLuck
 {
 
-    public class LogIn
+    public class LogInObject
     {
         public int success { get; set; }
         public string msg { get; set; }

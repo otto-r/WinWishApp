@@ -10,10 +10,10 @@ namespace WishMeLuck
     /// </summary>
     public partial class NewItem : Window
     {
-        LogIn logInObjectUsable;
+        LogInObject logInObjectUsable;
         ObjectOfWishLists listOfWishListsObjectUsable;
 
-        public NewItem(LogIn logInUserObject, ObjectOfWishLists listOfWishListsObject, string selectedList)
+        public NewItem(LogInObject logInUserObject, ObjectOfWishLists listOfWishListsObject, string selectedList)
         {
             logInObjectUsable = logInUserObject;
             listOfWishListsObjectUsable = listOfWishListsObject;
@@ -56,7 +56,7 @@ namespace WishMeLuck
                     string method = "POST";
                     string phpFileName = "addWish.php";
 
-                    string jsonStr = WebReq.WebRq(postData, method, phpFileName);
+                    string jsonStr = WebReq.WebRq(postData, method, phpFileName,"");
 
                     var addNewWishObj = JsonConvert.DeserializeObject<AddNewWishObj>(jsonStr);
 
