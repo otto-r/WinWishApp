@@ -5,15 +5,13 @@ using System.Windows.Media;
 
 namespace WishMeLuck
 {
-    /// <summary>
-    /// Interaction logic for NewItem.xaml
-    /// </summary>
+    public delegate void UpdateList();
     public partial class NewItem : Window
     {
-        LogIn logInObjectUsable;
+        LogInObject logInObjectUsable;
         ObjectOfWishLists listOfWishListsObjectUsable;
 
-        public NewItem(LogIn logInUserObject, ObjectOfWishLists listOfWishListsObject, string selectedList)
+        public NewItem(LogInObject logInUserObject, ObjectOfWishLists listOfWishListsObject, string selectedList)
         {
             logInObjectUsable = logInUserObject;
             listOfWishListsObjectUsable = listOfWishListsObject;
@@ -48,7 +46,7 @@ namespace WishMeLuck
             string wishDescription = TextBoxItemDescription.Text;
             string wishAvailableAt = TextBoxItemAvailableAt.Text;
 
-            if (UserInputValidation.ValidCharacters(wishName, true))
+            if (UserInputValidation.InputValidator(wishName, true).ValidInput)
             {
                 Task.Run(() =>
                 {
@@ -56,7 +54,7 @@ namespace WishMeLuck
                     string method = "POST";
                     string phpFileName = "addWish.php";
 
-                    string jsonStr = WebReq.WebRq(postData, method, phpFileName);
+                    string jsonStr = WebReq.WebRq(postData, method, phpFileName, "");
 
                     var addNewWishObj = JsonConvert.DeserializeObject<AddNewWishObj>(jsonStr);
 
@@ -66,7 +64,7 @@ namespace WishMeLuck
                         {
                             LabelUserInteractionFeedBack.Foreground = Brushes.LightGreen;
                             LabelUserInteractionFeedBack.Content = "Successful";
-
+                            
                             this.Close();
                         });
                     }

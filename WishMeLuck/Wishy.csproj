@@ -60,6 +60,9 @@
     <Compile Include="DeletePrompt.xaml.cs">
       <DependentUpon>DeletePrompt.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FriendsWishLists.xaml.cs">
+      <DependentUpon>FriendsWishLists.xaml</DependentUpon>
+    </Compile>
     <Compile Include="JSONObjects.cs" />
     <Compile Include="NewItem.xaml.cs">
       <DependentUpon>NewItem.xaml</DependentUpon>
@@ -67,13 +70,19 @@
     <Compile Include="NewWishList.xaml.cs">
       <DependentUpon>NewWishList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Register.cs" />
+    <Compile Include="ShareWindow.xaml.cs">
+      <DependentUpon>ShareWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserInputValidation.cs" />
     <Compile Include="WebRequest.cs" />
     <Compile Include="DeletePromptWishList.xaml.cs">
       <DependentUpon>DeletePromptWishList.xaml</DependentUpon>
     </Compile>
     <Page Include="DeletePrompt.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FriendsWishLists.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -105,6 +114,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DeletePromptWishList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ShareWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

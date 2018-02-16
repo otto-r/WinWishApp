@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WishMeLuck"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="NewItem" Height="300" Width="300">
+        Title="NewItem" Height="316.93" Width="300">
     <Grid>
         <Label x:Name="LabelCurrentList" Content="Current list name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Column="0" Grid.Row="0" />
         <Label x:Name="LabelUserInteractionFeedBack" Content="" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Column="1" Grid.Row="0" />

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace WishMeLuck
 {
 
-    public class LogIn
+    public class LogInObject
     {
         public int success { get; set; }
         public string msg { get; set; }
@@ -32,6 +32,7 @@ namespace WishMeLuck
     public class WishList
     {
         public string wishListName { get; set; }
+        public List<string> friendList { get; set; }
         public List<WishListItem> wishList { get; set; }
     }
 
@@ -67,5 +68,34 @@ namespace WishMeLuck
         public string msg { get; set; }
     }
 
+
+    public class FriendListRequest
+    {
+        public string un { get; set; }
+        public string wln { get; set; }
+        public List<string> sun { get; set; }
+    }
+
+
+    public class ShareObject
+    {
+        public int success { get; set; }
+        public string msg { get; set; }
+        public List<Friend> friends { get; set; }
+    }
+
+    public class Friend
+    {
+        public string shareToUser { get; set; }
+        public string msg { get; set; }
+    }
+
+
+    public class SharedListObject
+    {
+        public int success { get; set; }
+        public string msg { get; set; }
+        public List<string> friends { get; set; }
+    }
 
 }

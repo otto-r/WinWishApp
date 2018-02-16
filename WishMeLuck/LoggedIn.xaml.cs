@@ -18,23 +18,19 @@ using System.Windows.Shapes;
 
 namespace WishMeLuck
 {
-    /// <summary>
-    /// Interaction logic for MainLogIn.xaml
-    /// </summary>
-    public partial class MainLogIn : Window
+    public partial class LoggedInWindow : Window
     {
-        LogIn LogInObj;
+        LogInObject LogInObj;
         ObjectOfWishLists objectOfWishLists;
         string selectedItemAvailableAt;
 
-        public MainLogIn(LogIn logInUserObject)
+        public LoggedInWindow(LogInObject logInUserObject)
         {
             LogInObj = logInUserObject;
             InitializeComponent();
             Dispatcher.Invoke(() =>
             {
                 UserName.Content = logInUserObject.user.username;
-
             });
 
             objectOfWishLists = GetListofLists(logInUserObject.user);
@@ -48,7 +44,7 @@ namespace WishMeLuck
             string method = "POST";
             string phpFileName = "getLists.php";
 
-            string jsonStr = WebReq.WebRq(postData, method, phpFileName);
+            string jsonStr = WebReq.WebRq(postData, method, phpFileName, "");
 
             ObjectOfWishLists ListOfLists = JsonConvert.DeserializeObject<ObjectOfWishLists>(jsonStr);
 
@@ -72,7 +68,7 @@ namespace WishMeLuck
             });
         }
 
-        private void FillListOfLists(ObjectOfWishLists ListOfLists)
+        public void FillListOfLists(ObjectOfWishLists ListOfLists)
         {
             if (ListOfLists.wishLists != null)
             {
@@ -94,7 +90,7 @@ namespace WishMeLuck
             }
         }
 
-        private void FillWishList(ObjectOfWishLists ListOfLists, string wishListName)
+        public void FillWishList(ObjectOfWishLists ListOfLists, string wishListName)
         {
             Dispatcher.Invoke(() =>
             {
@@ -152,7 +148,6 @@ namespace WishMeLuck
                             {
                                 ButtonAvailableAt.IsEnabled = false;
                             }
-
 
                             LabelItemName.Content = item.wishItemName;
                             LabelItemDescrition.Text = item.wishItemDesc.ToString();
@@ -237,6 +232,24 @@ namespace WishMeLuck
                     }
                 }
             }
+        }
+
+        private void ButtonShareList_Click(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                string selectedList;
+                if (WishListOfLists.SelectedIndex == -1)
+                {
+                    selectedList = "";
+                }
+                else
+                {
+                    selectedList = WishListOfLists.SelectedItem.ToString();
+                }
+                ShareWindow shareWindow = new ShareWindow(LogInObj, objectOfWishLists, selectedList);
+                shareWindow.Show();
+            });
         }
     }
 }

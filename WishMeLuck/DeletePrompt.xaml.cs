@@ -20,10 +20,10 @@ namespace WishMeLuck
     /// </summary>
     public partial class DeletePrompt : Window
     {
-        LogIn logInObjectUsable;
+        LogInObject logInObjectUsable;
         WishListItem wishListItem;
 
-        public DeletePrompt(LogIn logIn, WishListItem wishItem)
+        public DeletePrompt(LogInObject logIn, WishListItem wishItem)
         {
             logInObjectUsable = logIn;
             wishListItem = wishItem;
@@ -44,7 +44,7 @@ namespace WishMeLuck
                 string method = "POST";
                 string phpFileName = "delWish.php";
 
-                string jsonStr = WebReq.WebRq(postData, method, phpFileName);
+                string jsonStr = WebReq.WebRq(postData, method, phpFileName, "");
 
                 var deleteItemObj = JsonConvert.DeserializeObject<DeleteItemObj>(jsonStr);
 

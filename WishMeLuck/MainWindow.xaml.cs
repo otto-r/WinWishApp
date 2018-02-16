@@ -8,9 +8,6 @@ using Newtonsoft.Json;
 
 namespace WishMeLuck
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         bool showRegistrationFields = false;
@@ -67,7 +64,7 @@ namespace WishMeLuck
             }
             else
             {
-                if (UserInputValidation.ValidCharacters(userName, false))
+                if (UserInputValidation.InputValidator(userName, false).ValidInput)
                 {
                     Task.Run(() =>
                     {
@@ -82,7 +79,7 @@ namespace WishMeLuck
                         {
                             try
                             {
-                                jsonStr = WebReq.WebRq(postData, method, phpFileName);
+                                jsonStr = WebReq.WebRq(postData, method, phpFileName, "");
                             }
                             catch (System.Exception err)
                             {
@@ -95,14 +92,14 @@ namespace WishMeLuck
                                 });
                             }
 
-                            LogIn logInUserObject = JsonConvert.DeserializeObject<LogIn>(jsonStr);
+                            LogInObject logInUserObject = JsonConvert.DeserializeObject<LogInObject>(jsonStr);
 
 
                             if (logInUserObject.success == 1)
                             {
                                 Dispatcher.Invoke(() =>
                                 {
-                                    MainLogIn mainLogInWindow = new MainLogIn(logInUserObject);
+                                    LoggedInWindow mainLogInWindow = new LoggedInWindow(logInUserObject);
                                     mainLogInWindow.Show();
                                     this.Close();
                                 });
@@ -169,7 +166,7 @@ namespace WishMeLuck
                 string error = "";
                 try
                 {
-                    jsonStr = WebReq.WebRq(postData, method, phpFileName);
+                    jsonStr = WebReq.WebRq(postData, method, phpFileName,"");
                 }
                 catch (System.Exception e)
                 {
@@ -182,14 +179,14 @@ namespace WishMeLuck
                     });
                 }
 
-                LogIn logInUserObject = JsonConvert.DeserializeObject<LogIn>(jsonStr);
+                LogInObject logInUserObject = JsonConvert.DeserializeObject<LogInObject>(jsonStr);
 
 
                 if (logInUserObject.success == 1)
                 {
                     Dispatcher.Invoke(() =>
                     {
-                        MainLogIn mainLogInWindow = new MainLogIn(logInUserObject);
+                        LoggedInWindow mainLogInWindow = new LoggedInWindow(logInUserObject);
                         mainLogInWindow.Show();
                         this.Close();
                     });
@@ -253,7 +250,7 @@ namespace WishMeLuck
                 infoBarHeight += 5;
                 await PutTaskDelay();
             }
-            await Task.Delay(3000);
+            await Task.Delay(3500);
             Dispatcher.Invoke(() =>
             {
                 InfoBarBG.Visibility = Visibility.Hidden;

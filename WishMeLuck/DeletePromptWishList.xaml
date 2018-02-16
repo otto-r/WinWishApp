@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WishMeLuck"
+        WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         Title="Are you sure?" Height="104.289" Width="327.765">
     <Grid>

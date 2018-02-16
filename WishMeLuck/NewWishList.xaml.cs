@@ -20,10 +20,10 @@ namespace WishMeLuck
     /// </summary>
     public partial class NewWishList : Window
     {
-        LogIn logInObjectUsable;
+        LogInObject logInObjectUsable;
         ObjectOfWishLists objectOfWishLits;
 
-        public NewWishList(LogIn logInUserObject, ObjectOfWishLists listOfWishListsObject)
+        public NewWishList(LogInObject logInUserObject, ObjectOfWishLists listOfWishListsObject)
         {
             InitializeComponent();
             logInObjectUsable = logInUserObject;
@@ -38,7 +38,7 @@ namespace WishMeLuck
         private void ButtonAddNewList_Click(object sender, RoutedEventArgs e)
         {
             string userWishListNameInput = TextBoxWishListName.Text.Trim();
-            if (UserInputValidation.ValidCharacters(userWishListNameInput, true) && !SeeIfWishListNameExists())
+            if (UserInputValidation.InputValidator(userWishListNameInput, true).ValidInput && !SeeIfWishListNameExists())
             {
                 Task.Run(() =>
                 {
@@ -46,7 +46,7 @@ namespace WishMeLuck
                     string method = "POST";
                     string phpFileName = "addWishList.php";
 
-                    string jsonStr = WebReq.WebRq(postData, method, phpFileName);
+                    string jsonStr = WebReq.WebRq(postData, method, phpFileName,"");
 
                     var addNewWishListObj = JsonConvert.DeserializeObject<AddNewWishListObj>(jsonStr);
 
