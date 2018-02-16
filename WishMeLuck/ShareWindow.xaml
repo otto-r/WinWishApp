@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="Share" Height="300" Width="188.939">
     <Grid>
-        <ComboBox x:Name="ComboBoxSelectWishList" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Grid.Column="1" Grid.Row="0" />
+        <ComboBox x:Name="ComboBoxSelectWishList" SelectionChanged="ComboBoxSelectWishList_SelectionChanged" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Grid.Column="1" Grid.Row="0" />
         
         <TextBox x:Name="TextBoxUsername" HorizontalAlignment="Center" Height="23" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="70" Margin="31,12.2,81.4,9.6"/>
         <Button x:Name="ButtonAdd" Content="Add" Click="ButtonAdd_Click" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Height="23" Width="40" Margin="111,0,25,0"/>

@@ -32,6 +32,7 @@ namespace WishMeLuck
     public class WishList
     {
         public string wishListName { get; set; }
+        public List<string> friendList { get; set; }
         public List<WishListItem> wishList { get; set; }
     }
 

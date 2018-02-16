@@ -15,21 +15,22 @@ using System.Windows.Shapes;
 
 namespace WishMeLuck
 {
-    /// <summary>
-    /// Interaction logic for Share.xaml
-    /// </summary>
     public partial class ShareWindow : Window
     {
         LogInObject logInObject;
-        public ShareWindow(LogInObject logInObjectIn, ObjectOfWishLists objectOfWishLists, string selectedList)
+        ObjectOfWishLists objectOfWishLists;
+
+        public ShareWindow(LogInObject logInObjectIn, ObjectOfWishLists objectOfWishListsIn, string selectedList)
         {
             logInObject = logInObjectIn;
+            objectOfWishLists = objectOfWishListsIn;
+
             InitializeComponent();
             Dispatcher.Invoke(() =>
             {
                 //for testing
 
-                FillComboBox(objectOfWishLists, selectedList);
+                FillComboBox(objectOfWishListsIn, selectedList);
                 FillFriendList();
                 Task.Run(() =>
                 {
@@ -101,6 +102,7 @@ namespace WishMeLuck
             });
         }
 
+
         private void FillFriendList()
         {
             string postData = "un=" + logInObject.user.username;
@@ -131,5 +133,44 @@ namespace WishMeLuck
             }
         }
 
+        private void ComboBoxSelectWishList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListBoxFriends.Items.Clear();
+            string selectedItem = ComboBoxSelectWishList.SelectedItem.ToString();
+
+            List<string> comboBoxFriendsAdd = new List<string>();
+            List<string> toAddList = new List<string>();
+            foreach (var list in objectOfWishLists.wishLists)
+            {
+                if (list.wishListName != selectedItem)
+                {
+                    foreach (var friend in list.friendList)
+                    {
+                        if (!comboBoxFriendsAdd.Contains(friend))
+                        {
+                            comboBoxFriendsAdd.Add(friend);
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var friend in list.friendList)
+                    {
+                        toAddList.Add(friend);
+                    }
+                }
+            }
+
+            foreach (var friend in comboBoxFriendsAdd)
+            {
+                foreach (var friend2 in toAddList)
+                {
+                    if (friend2.Equals(friend))
+                    {
+                        ListBoxFriends.Items.Add(friend);
+                    }
+                }
+            }
+        }
     }
 }
