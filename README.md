@@ -6,6 +6,8 @@ Working together to coordinate while building separate applications communicatin
 Wish list application for testing/proof of concept. Users may create wish lists which contain items.
 These lists can be shared among users.
 
+Server is a Raspberry Pi with MySQL and PHP.
+
 Built to test and construct the architecture of the database.
 
 Future concerns:
