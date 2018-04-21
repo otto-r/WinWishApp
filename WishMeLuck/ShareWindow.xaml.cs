@@ -1,17 +1,8 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace WishMeLuck
 {
@@ -58,10 +49,12 @@ namespace WishMeLuck
         }
         private void ButtonShare_Click(object sender, RoutedEventArgs e)
         {
-            FriendListRequest friendListRequest = new FriendListRequest();
-            friendListRequest.un = logInObject.user.username;
-            friendListRequest.wln = ComboBoxSelectWishList.SelectedItem.ToString();
-            friendListRequest.sun = new List<string>();
+            FriendListRequest friendListRequest = new FriendListRequest
+            {
+                un = logInObject.user.username,
+                wln = ComboBoxSelectWishList.SelectedItem.ToString(),
+                sun = new List<string>()
+            };
             foreach (var friend in ListBoxFriends.SelectedItems)
             {
                 friendListRequest.sun.Add(friend.ToString());
@@ -87,6 +80,7 @@ namespace WishMeLuck
                 foreach (var friend in shareObject.friends)
                 {
                     list += " " + friend.shareToUser;
+                    list += " " + friend.msg;
                 }
                 MessageBox.Show(shareObject.msg + "\n" + list);
             }
@@ -113,24 +107,24 @@ namespace WishMeLuck
 
             var sharedListObject = JsonConvert.DeserializeObject<SharedListObject>(jsonStr);
 
-            if (sharedListObject.friends == null)
-            {
-                //this.Close();
-                Dispatcher.Invoke(() =>
-                {
-                    ListBoxFriends.Items.Add("null");
-                });
-            }
-            else
-            {
-                foreach (var friend in sharedListObject.friends)
-                {
-                    Dispatcher.Invoke(() =>
-                    {
-                        ListBoxFriends.Items.Add(friend);
-                    });
-                }
-            }
+            //if (sharedListObject.friends == null)
+            //{
+            //    //this.Close();
+            //    Dispatcher.Invoke(() =>
+            //    {
+            //        ListBoxFriends.Items.Add("null");
+            //    });
+            //}
+            //else
+            //{
+            //    foreach (var friend in sharedListObject.friends)
+            //    {
+            //        Dispatcher.Invoke(() =>
+            //        {
+            //            ListBoxFriends.Items.Add(friend);
+            //        });
+            //    }
+            //}
         }
 
         private void ComboBoxSelectWishList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -138,17 +132,20 @@ namespace WishMeLuck
             ListBoxFriends.Items.Clear();
             string selectedItem = ComboBoxSelectWishList.SelectedItem.ToString();
 
-            List<string> comboBoxFriendsAdd = new List<string>();
-            List<string> toAddList = new List<string>();
+            List<string> otherLists = new List<string>();
+            List<string> sharedWith = new List<string>();
+            List<string> fillShareList = new List<string>();
+
+
             foreach (var list in objectOfWishLists.wishLists)
             {
                 if (list.wishListName != selectedItem)
                 {
                     foreach (var friend in list.friendList)
                     {
-                        if (!comboBoxFriendsAdd.Contains(friend))
+                        if (!otherLists.Contains(friend) || otherLists != null)
                         {
-                            comboBoxFriendsAdd.Add(friend);
+                            otherLists.Add(friend);
                         }
                     }
                 }
@@ -156,20 +153,25 @@ namespace WishMeLuck
                 {
                     foreach (var friend in list.friendList)
                     {
-                        toAddList.Add(friend);
+                        sharedWith.Add(friend);
                     }
                 }
             }
 
-            foreach (var friend in comboBoxFriendsAdd)
+            foreach (var friend in otherLists)
             {
-                foreach (var friend2 in toAddList)
+                if (!sharedWith.Contains(friend) && !fillShareList.Contains(friend))
                 {
-                    if (friend2.Equals(friend))
-                    {
-                        ListBoxFriends.Items.Add(friend);
-                    }
+                    fillShareList.Add(friend);
                 }
+            }
+
+            foreach (var friend in fillShareList)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    ListBoxFriends.Items.Add(friend);
+                });
             }
         }
     }

@@ -22,6 +22,7 @@ namespace WishMeLuck
     {
         LogInObject LogInObj;
         ObjectOfWishLists objectOfWishLists;
+        FriendRequest friendRequestTop;
         string selectedItemAvailableAt;
 
         public LoggedInWindow(LogInObject logInUserObject)
@@ -35,6 +36,7 @@ namespace WishMeLuck
 
             objectOfWishLists = GetListofLists(logInUserObject.user);
             FillListOfLists(objectOfWishLists);
+            FillFriendList(LogInObj.user);
 
         }
 
@@ -251,5 +253,72 @@ namespace WishMeLuck
                 shareWindow.Show();
             });
         }
+
+        private void FillFriendList(User user)
+        {
+            FriendRequest friendRequest = GetFriendsLists(user);
+            if (friendRequest.wishLists != null)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    ListBoxFriendsLits.Items.Clear();
+                    foreach (var item in friendRequest.wishLists)
+                    {
+                        ListBoxFriendsLits.Items.Add(item.wishListName);
+                    }
+                });
+            }
+        }
+
+        private FriendRequest GetFriendsLists(User user)
+        {
+            string postData = "un=" + user.username;
+            string method = "POST";
+            string phpFileName = "getSharedLists.php";
+
+            string jsonStr = WebReq.WebRq(postData, method, phpFileName, "");
+
+            friendRequestTop = JsonConvert.DeserializeObject<FriendRequest>(jsonStr);
+
+            return friendRequestTop;
+        }
+
+
+        private void ListBoxFriendsLits_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ListBoxFriendsLits.SelectedIndex == -1)
+            {
+                return;
+            }
+            else
+            {
+                string selectedWishList = ListBoxFriendsLits.SelectedItem.ToString();
+                Dispatcher.Invoke(() =>
+                {
+                    ListBoxFriendsLitsItems.Items.Clear();
+                    foreach (var item in friendRequestTop.wishLists)
+                    {
+                        ListBoxFriendsLitsItems.Items.Add(item.wishListName); //Lägg till name sen när mackan fixar
+                    }
+                });
+            }
+        }
+
+        //public void FillFriendWishList(ObjectOfWishLists ListOfLists, string wishListName)
+        //{
+        //    Dispatcher.Invoke(() =>
+        //    {
+        //        foreach (var WishList in ListOfLists.wishLists)
+        //        {
+        //            if (WishList.wishListName == wishListName)
+        //            {
+        //                foreach (var item in WishList.wishList)
+        //                {
+        //                    WishListBox.Items.Add(item.wishItemName);
+        //                }
+        //            }
+        //        }
+        //    });
+        //}
     }
 }

@@ -98,4 +98,18 @@ namespace WishMeLuck
         public List<string> friends { get; set; }
     }
 
+
+    public class FriendRequest
+    {
+        public int success { get; set; }
+        public string msg { get; set; }
+        public Wishlist[] wishLists { get; set; }
+    }
+
+    public class Wishlist
+    {
+        public string wishListName { get; set; }
+        public object wishList { get; set; }
+    }
+
 }
